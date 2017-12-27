@@ -1,0 +1,102 @@
+* {
+    box-sizing: border-box;
+	font-family: "Verdana", sans-serif;
+}
+
+body {
+    margin: 0; background:#ccf
+}
+
+/* Style the header */
+.header {
+	color: #ffffff;
+    background-color: #001372;
+    padding: 50px;
+    text-align: center;
+}
+
+/* Create three equal columns that floats next to each other */
+.column {
+    float: left;
+    width: 33.33%;
+    padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Style the footer */
+.footer {
+    background-color: #f1f1f1;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media (max-width: 750px) {
+    .column {
+        width: 50%;
+    }
+}
+@media (max-width: 450px) {
+    .column {
+        width: 100%;
+    }
+}
+
+/* Links as boxes */
+a.box:link, a.box:visited {
+    background-color: #eee;/*#36c;*/
+    border:2px solid #36c;
+    /*color: #111;*/
+    /*padding: 14px 25px;*/
+	padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 10px;
+	width:100%;
+}
+a.box:hover, a.box:active {
+    background-color: #fff;
+}
+
+/* Text styles */
+.main-label {
+    background-color: #2a4b8d;
+	color: #fff;
+	font-size: 140%;
+	font-weight: bold;
+	padding: 2px 10px;
+}
+.main-desc {
+    background-color: #72777d;
+	color: #fff;
+	font-size: 120%;
+	padding: 2px 20px;
+}
+.box-label {
+	font-size: 110%;
+	font-weight: bold;
+	color: #36c;
+}
+.box-desc {
+	font-size: 90%;
+	color: #555;
+	line-height: 1.1em;
+	margin-top: 0.2em;
+	min-height: 2.2em;
+}
+.small {
+	font-size: 80%;
+}
+
+/* Logo images */
+.logo {
+	width: 50px;
+	float:left;
+}
