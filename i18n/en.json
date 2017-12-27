@@ -1,0 +1,22 @@
+{
+	"wikipedia": {
+		"name": "Wikipedia",
+		"type": "Article"
+	},
+	"wikivoyage": {
+		"name": "Wikivoyage",
+		"type": "Travel guide"
+	},
+	"wikisource": {
+		"name": "Wikisource",
+		"type": "Source texts"
+	},
+	"commons": {
+		"name": "Wikimedia Commons",
+		"type": "Media files"
+	},
+	"reasonator": {
+		"name": "Reasonator",
+		"type": "Data"
+	}
+}
