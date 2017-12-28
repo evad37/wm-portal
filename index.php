@@ -23,7 +23,9 @@ require "core.php";
 $item_data = lookupItemData($item_id, $lang_code);
 $item_label = getDeepData($item_data, ["labels", $lang_code, "value"], "({$item_id})");
 $item_desc  = getDeepData($item_data, ["descriptions", $lang_code, "value"]); 
-$related_items = lookupRelatedItemsData( lookupRelatedItemIds($item_id), $lang_code);
+$related_items = lookupMultipleItemsData( lookupRelatedItemIds($item_id), $lang_code);
+$nearby_items  = lookupMultipleItemsData( lookupNearbyItemIds( lookupCoords($item_id) ), $lang_code);
+
 
 echo makeHeading($item_label, $item_desc);
 
@@ -58,6 +60,23 @@ if ( count($related_items) > 0 ) {
 			false,
 			$r['label'],
 			$r['description']
+		);
+	}
+	echo "</div>";
+}
+
+if ( count($nearby_items) > 0 ) {
+	echo "<div class='row main-desc'>" . getDeepData($i18n, ['nearby'], 'Nearby') . "</div>";
+	//print_r($nearby_items);
+	
+	echo "<div class='row'>";
+	
+	foreach ($nearby_items as $n) {
+		echo makeBoxlink(
+			"{$self}/{$n['item']}/{$lang_code}",
+			false,
+			$n['label'],
+			$n['description']
 		);
 	}
 	echo "</div>";

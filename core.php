@@ -2,8 +2,8 @@
 // set data vars
 $tool_info = [
 	"name" => "Knowledge Portal",
-	"version" => "0.0.2-dev",
-	"updated" => "2017-12-26",
+	"version" => "0.0.3-dev",
+	"updated" => "2017-12-28",
 	"author_name" => "Evad37",
 	"author_contact" => "https://en.wikipedia.org/wiki/User:Evad37"
 ];
@@ -44,7 +44,28 @@ function getSiteType($site_code) {
 	return 'wikipedia';
 }
 
+function extractPageTitle($page) {
+	return $page["title"];
+}
 
+function joinWithPipes($v1, $v2) {
+	if ( $v1 === "" ) {
+		return $v2;
+	}
+	return "{$v1}|{$v2}";
+}	
+
+function simplifyItemData($itemId, $itemData) {
+	$lang_code = $GLOBALS['lang_code'];
+	$label = getDeepData($itemData, ["labels", $lang_code, "value"], "[no {$lang_code} label]");
+	$description = getDeepData($itemData, ["descriptions", $lang_code, "value"], "");
+	return [
+		"item" => $itemId,
+		"label" => $label,
+		"description" => $description
+	];
+}
+	
 // Api class
 class Api
 {
@@ -111,10 +132,6 @@ function lookupItemData ($item_id, $lang_code) {
 }
 
 function lookupRelatedItemIds ($item_id) {
-	function extractPageTitle($page) {
-		return $page["title"];
-	}
-
 	$api = $GLOBALS['api'];
 	
 	$result = $api->get([
@@ -129,21 +146,69 @@ function lookupRelatedItemIds ($item_id) {
 	]);
 	$pageid = array_keys($result["query"]["pages"])[0];
 	$linkshere = getDeepData($result, ["query", "pages", $pageid, "linkshere"], []);
-	$related_ids = array_map("extractPageTitle", $result["query"]["pages"][$pageid]["linkshere"]);
+	$related_ids = array_map("extractPageTitle", $linkshere);
 	return $related_ids;
 }
 
-function lookupRelatedItemsData($related_ids, $lang_code) {
-	if (count($related_ids) == 0 ){
+function lookupCoords($item_id) {
+	$api = $GLOBALS['api'];
+		
+	$result = $api->get([
+		"action" => "query",
+		"format" => "json",
+		"prop" => "coordinates",
+		"titles" => $item_id,
+		"colimit" => "1",
+		"coprimary" => "primary"
+	]);
+	$pageid = array_keys($result["query"]["pages"])[0];
+	$coords = getDeepData($result, ["query", "pages", $pageid, "coordinates", 0], false);
+	return $coords;
+}
+
+function lookupNearbyItemIds($coords) {
+	if ( !$coords ) {
+		return [];
+	}
+	if ( !isset($coords['lat']) || !isset($coords['lon']) || !isset($coords['globe']) ) {
 		return [];
 	}
 	
-	function joinWithPipes($v1, $v2) {
-		if ( $v1 === "" ) {
-			return $v2;
-		}
-		return "{$v1}|{$v2}";
+	$api = $GLOBALS['api'];
+		
+	$result = $api->get([
+		"action" => "query",
+		"format" => "json",
+		"list" => "geosearch",
+		"gscoord" => joinWithPipes($coords['lat'], $coords['lon']),
+		"gsradius" => "5000",
+		"gsglobe" => $coords['globe'],
+		"gslimit" => "10",
+		"gsnamespace" => "0",
+		"gsprimary" => "primary"
+	]);
+
+	$geosearch = getDeepData($result, ['query', 'geosearch'], false);
+	if ( !$geosearch ) {
+		return [];
 	}
+	
+	function notTooClose($item) {
+		return getDeepData($item, ['dist'], -1) > 5;
+	}
+	
+	$nearby = array_filter($geosearch, 'notTooClose');
+	$nearby_shortlist =  array_slice($nearby, 0, 3);
+	$nearby_ids = array_map("extractPageTitle", $nearby_shortlist);
+
+	return $nearby_ids;
+}
+
+function lookupMultipleItemsData($related_ids, $lang_code) {
+	if (count($related_ids) == 0 ){
+		return [];
+	}
+
 	$api = $GLOBALS['api'];
 	
 	$result = $api->get([
@@ -159,16 +224,7 @@ function lookupRelatedItemsData($related_ids, $lang_code) {
 		return [];
 	}
 	
-	function simplifyItemData($itemId, $itemData) {
-		$lang_code = $GLOBALS['lang_code'];
-		$label = getDeepData($itemData, ["labels", $lang_code, "value"], "[no {$lang_code} label]");
-		$description = getDeepData($itemData, ["descriptions", $lang_code, "value"], "");
-		return [
-			"item" => $itemId,
-			"label" => $label,
-			"description" => $description
-		];
-	}
+
 	
 	return array_map("simplifyItemData", array_keys($entities), $entities);
 }
