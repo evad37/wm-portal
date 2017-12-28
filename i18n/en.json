@@ -1,4 +1,7 @@
 {
+	"related": "Related items",
+	"nearby": "Nearby items",
+	
 	"wikipedia": {
 		"name": "Wikipedia",
 		"type": "Article"

@@ -77,7 +77,7 @@ class Api
 		
 		$result = ( isset($fatal_error) ) ? $fatal_error : json_decode($response, true);
 		
-		if ( !isset($result['success']) || isset($result['error']) ) {
+		if ( /*!isset($result['success']) ||*/ isset($result['error']) ) {
 			$error_code = getDeepData($result, ['error', 'code'], false);
 			$error_info = getDeepData($result, ['error', 'info'], 'An unknown error occurred.');
 			echo ( $error_code ) ? "Api error {$error_code}: {$error_info}" : "Api error: {$error_info}";
@@ -109,18 +109,15 @@ function lookupItemData ($item_id, $lang_code) {
 
 	return $result["entities"][$item_id];
 }
-/* Get related items
-	function extractId($obj) {
-		return $obj["title"];
-	}
-	function joinWithPipes($v1, $v2) {
-		if ( $v1 === "" ) {
-			return $v2;
-		}
-		return "{$v1}|{$v2}";
+
+function lookupRelatedItemIds ($item_id) {
+	function extractPageTitle($page) {
+		return $page["title"];
 	}
 
-	$related = $api->get([
+	$api = $GLOBALS['api'];
+	
+	$result = $api->get([
 		"action" => "query",
 		"format" => "json",
 		"prop" => "linkshere",
@@ -128,45 +125,54 @@ function lookupItemData ($item_id, $lang_code) {
 		"lhprop" => "title",
 		"lhnamespace" => "0",
 		"lhshow" => "!redirect",
-		"lhlimit" => "10"
+		"lhlimit" => "3"
 	]);
-	//print_r($related);
-	
-	$pageid = array_keys($related["query"]["pages"])[0];
-	echo "<br>";
-	
-	if ( getDeepData($related, ["query", "pages", $pageid, "linkshere"], false) ) {
-		
-		$related_ids = array_reduce(
-			array_map("extractId", $related["query"]["pages"][$pageid]["linkshere"]),
-			"joinWithPipes",
-			""
-		);
-		$related_items_data = $api->get([
-			"action" => "wbgetentities",
-			"format" => "json",
-			"ids" => $related_ids,
-			"redirects" => "yes",
-			"props" => "labels",
-			"languages" => $lang_code
-		]);
-		
-		function extractLabel($obj) {
-			$lang_code = $GLOBALS['lang_code'];
-			$label = getDeepData($obj, ["labels", $lang_code, "value"], false);
-			if ( !$label ) {
-				return '[NO LABEL]';
-			}
-			return $label;
-		}
-		$related_items = array_map("extractLabel", $related_items_data["entities"]);		
-		
-		//print_r($related_items);
-	} else {
-		echo "No related items";
+	$pageid = array_keys($result["query"]["pages"])[0];
+	$linkshere = getDeepData($result, ["query", "pages", $pageid, "linkshere"], []);
+	$related_ids = array_map("extractPageTitle", $result["query"]["pages"][$pageid]["linkshere"]);
+	return $related_ids;
+}
+
+function lookupRelatedItemsData($related_ids, $lang_code) {
+	if (count($related_ids) == 0 ){
+		return [];
 	}
 	
-*/
+	function joinWithPipes($v1, $v2) {
+		if ( $v1 === "" ) {
+			return $v2;
+		}
+		return "{$v1}|{$v2}";
+	}
+	$api = $GLOBALS['api'];
+	
+	$result = $api->get([
+		"action" => "wbgetentities",
+		"format" => "json",
+		"ids" => array_reduce($related_ids, "joinWithPipes", ""),
+		"redirects" => "yes",
+		"props" => "labels|descriptions",
+		"languages" => $lang_code
+	]);
+	$entities = getDeepData($result, ["entities"], false);
+	if ( !$entities ) {
+		return [];
+	}
+	
+	function simplifyItemData($itemId, $itemData) {
+		$lang_code = $GLOBALS['lang_code'];
+		$label = getDeepData($itemData, ["labels", $lang_code, "value"], "[no {$lang_code} label]");
+		$description = getDeepData($itemData, ["descriptions", $lang_code, "value"], "");
+		return [
+			"item" => $itemId,
+			"label" => $label,
+			"description" => $description
+		];
+	}
+	
+	return array_map("simplifyItemData", array_keys($entities), $entities);
+}
+
 
 /* ---------- Formatting ------------------------------------------------------------------------ */
 function makeHeading ($label, $description) {
@@ -175,9 +181,10 @@ function makeHeading ($label, $description) {
 }
 
 function makeBoxlink ($url, $logo, $title, $subtitle) {
+	$img = ( $logo ) ? "<img class='logo' src='{$logo}' alt='{$subtitle}'>" : '';
 	return "<div class=column>
 	<a class='box' href='{$url}'>
-		<img class='logo' src='{$logo}' alt='{$subtitle}'>
+		{$img}
 		<div class='box-label'>{$title}</div>
 		<div class='box-desc'>{$subtitle}</div>
 	</a></div>";
