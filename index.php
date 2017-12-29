@@ -7,21 +7,30 @@
 </head>
 <body>
 <?php
+require "core.php";
+require "getDefaultLanguage.php";
+
 $self = "http://" . htmlspecialchars($_SERVER["HTTP_HOST"]) . "/portal";
 // item id and lang code from url query params
-$item_id = ( isset($_GET['id']) ) ? $_GET['id'] : 'Q1';
-$lang_code = ( isset($_GET['lang']) ) ? $_GET['lang'] : 'en';
+$item_id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_STRING);// ?: 'Q1';
+$lang_code = filter_input(INPUT_GET, 'lang', FILTER_SANITIZE_STRING) ?: sanitizeDefaultLang(getDefaultLanguage());
 
-// TODO: input validation
+if ( !preg_match("/^Q\d+$/", $item_id) ) {
+    die("Bad item code.");
+}
+	
 
-// i18n
-$i18n = json_decode(file_get_contents("i18n/{$lang_code}.json"), true);
+$available_langs = json_decode(file_get_contents("i18n/_langs.json"), true);
+if ( !isset($available_langs[$lang_code]) ) {
+	echo "Sorry, the tool interface has not yet been translated for <code>{$lang_code}</code> language.";
+	$i18n = json_decode(file_get_contents("i18n/en.json"), true);
+} else {
+	$i18n = json_decode(file_get_contents("i18n/{$lang_code}.json"), true);
+}
 
-
-require "core.php";
 
 $item_data = lookupItemData($item_id, $lang_code);
-$item_label = getDeepData($item_data, ["labels", $lang_code, "value"], "({$item_id})");
+$item_label = getDeepData($item_data, ["labels", $lang_code, "value"], "({$item_id}: {$i18n['nolabel']})");
 $item_desc  = getDeepData($item_data, ["descriptions", $lang_code, "value"]); 
 $related_items = lookupMultipleItemsData( lookupRelatedItemIds($item_id), $lang_code);
 $nearby_items  = lookupMultipleItemsData( lookupNearbyItemIds( lookupCoords($item_id) ), $lang_code);

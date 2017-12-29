@@ -2,8 +2,8 @@
 // set data vars
 $tool_info = [
 	"name" => "Knowledge Portal",
-	"version" => "0.0.3-dev",
-	"updated" => "2017-12-28",
+	"version" => "0.0.4-dev",
+	"updated" => "2017-12-29",
 	"author_name" => "Evad37",
 	"author_contact" => "https://en.wikipedia.org/wiki/User:Evad37"
 ];
@@ -17,9 +17,36 @@ $site_logos = [
 
 
 /* ---------- Helper functions ------------------------------------------------------------------ */
+function sanitizeDefaultLang($code) {
+	if ( !strpos($code, '-') ) {
+		return $code;
+	}
+	
+	switch ($code) {
+		// Languages with dashes which have Wikipedias can be returned as-is:
+		case 'zh-yue':
+		case 'roa-rup':
+		case 'map-bms':
+		case 'nds-nl':
+		case 'bat-smg':
+		case 'roa-tara':
+		case 'fiu-vro':
+		case 'zh-min-nan':
+		case 'zh-classical':
+		case 'cbk-zam':
+		case 'be-x-old':
+			return $code;
+			break;
+		default:
+			// Strip everything after and including the first dash
+			return explode("-", $code)[0];
+	}
+}
 // Get data from deeply nested arrays, or a default value if any of the nested keys aren't set;
 // i.e. `getDeepData($arr, [key1, key2, key3])` is equivalent to `$arr[key1][key2[key3]`
 // if all the keys are set.
+
+
 function getDeepData($arr, $keys, $default="") {
 	$data = $arr;
 	foreach ( $keys as $key ) {
@@ -57,7 +84,8 @@ function joinWithPipes($v1, $v2) {
 
 function simplifyItemData($itemId, $itemData) {
 	$lang_code = $GLOBALS['lang_code'];
-	$label = getDeepData($itemData, ["labels", $lang_code, "value"], "[no {$lang_code} label]");
+	$i18n = $GLOBALS['i18n'];
+	$label = getDeepData($itemData, ["labels", $lang_code, "value"], "({$itemId}: {$i18n['nolabel']})");
 	$description = getDeepData($itemData, ["descriptions", $lang_code, "value"], "");
 	return [
 		"item" => $itemId,
@@ -261,3 +289,5 @@ function makefooter ($id) {
 	<li><a href='https://commons.wikimedia.org/wiki/File:Notification-icon-Wikivoyage-logo.svg'>Wikivoyage icon</a> by User:Jdforrester (WMF), User:AleXXw, User:‎Danapit:  <a href='https://creativecommons.org/licenses/by-sa/3.0/deed.en'>CC-BY-SA 3.0 Unported license</a></li>
 	</ul>";
 }
+
+?>
