@@ -13,10 +13,12 @@ require "getDefaultLanguage.php";
 $self = "http://" . htmlspecialchars($_SERVER["HTTP_HOST"]) . "/portal";
 // item id and lang code from url query params
 $item_id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_STRING);// ?: 'Q1';
-$lang_code = filter_input(INPUT_GET, 'lang', FILTER_SANITIZE_STRING) ?: sanitizeDefaultLang(getDefaultLanguage());
+$lang_code = getBaseLanguage(filter_input(INPUT_GET, 'lang', FILTER_SANITIZE_STRING) ?: getDefaultLanguage());
 
 if ( !preg_match("/^Q\d+$/", $item_id) ) {
-    die("Bad item code.");
+    echo("Bad item code.<hr>");
+	echo makefooter($item_id);
+	die();
 }
 	
 
@@ -39,15 +41,16 @@ $nearby_items  = lookupMultipleItemsData( lookupNearbyItemIds( lookupCoords($ite
 echo makeHeading($item_label, $item_desc);
 
 echo "<div class='row'>";
-
-foreach ($item_data["sitelinks"] as $site => $site_info) {
-	$sitetype = getSiteType($site);
-	echo makeBoxlink(
-		$site_info["url"],
-		"{$self}/images/{$sitetype}.png",
-		getDeepData($i18n, [$sitetype, 'type'], $site_info['title']),
-		getDeepData($i18n, [$sitetype, 'name'], parse_url($site_info['url'], PHP_URL_HOST))
-	);
+if ( isset($item_data["sitelinks"]) ) {
+	foreach ($item_data["sitelinks"] as $site => $site_info) {
+		$sitetype = getSiteType($site);
+		echo makeBoxlink(
+			$site_info["url"],
+			"{$self}/images/{$sitetype}.png",
+			getDeepData($i18n, [$sitetype, 'type'], $site_info['title']),
+			getDeepData($i18n, [$sitetype, 'name'], parse_url($site_info['url'], PHP_URL_HOST))
+		);
+	}
 }
 echo makeBoxlink(
 	"https://tools.wmflabs.org/reasonator/?q={$item_id}",

@@ -17,7 +17,9 @@ $site_logos = [
 
 
 /* ---------- Helper functions ------------------------------------------------------------------ */
-function sanitizeDefaultLang($code) {
+// Returns the base language (i.e. `en` for `en-gb`), except for language variants which have a
+// Wikipedia.
+function getBaseLanguage($code) {
 	if ( !strpos($code, '-') ) {
 		return $code;
 	}
