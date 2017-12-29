@@ -94,6 +94,9 @@ a.box:hover, a.box:active {
 .small {
 	font-size: 80%;
 }
+code {
+	font-family: monospace;
+}
 
 /* Logo images */
 .logo {

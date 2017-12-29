@@ -1,0 +1,26 @@
+{
+	"related": "Articles connexes",
+	"nearby": "Articles à proximité",
+	"nolabel": "pas de label",
+	
+	"wikipedia": {
+		"name": "Wikipédia",
+		"type": "Article"
+	},
+	"wikivoyage": {
+		"name": "Wikivoyage",
+		"type": "Guide touristique"
+	},
+	"wikisource": {
+		"name": "Wikisource",
+		"type": "Texte source"
+	},
+	"commons": {
+		"name": "Wikimédia Commons",
+		"type": "Multimédia"
+	},
+	"reasonator": {
+		"name": "Reasonator",
+		"type": "Données"
+	}
+}
