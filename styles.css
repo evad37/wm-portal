@@ -98,6 +98,13 @@ code {
 	font-family: monospace;
 }
 
+/* Language selection, Edit on wikidata */
+.main-extra {
+	float:right;
+	font-size:85%;
+	height:30px;
+}
+
 /* Logo images */
 .logo {
 	width: 50px;

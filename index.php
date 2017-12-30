@@ -38,7 +38,10 @@ $related_items = lookupMultipleItemsData( lookupRelatedItemIds($item_id), $lang_
 $nearby_items  = lookupMultipleItemsData( lookupNearbyItemIds( lookupCoords($item_id) ), $lang_code);
 
 
-echo makeHeading($item_label, $item_desc);
+echo makeHeading(
+	$item_label . makeLangSelector($item_id, "{$self}/images/language_selection.png"),
+	$item_desc
+);
 
 echo "<div class='row'>";
 if ( isset($item_data["sitelinks"]) ) {

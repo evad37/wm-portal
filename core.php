@@ -261,6 +261,24 @@ function lookupMultipleItemsData($related_ids, $lang_code) {
 
 
 /* ---------- Formatting ------------------------------------------------------------------------ */
+function makeLangOption($lang, $lang_name) {
+	$current_lang = $GLOBALS['lang_code'];
+	$selected = ( $lang === $current_lang ) ? ' selected' : '';
+	return "<option value='{$lang}'{$selected}>{$lang}: {$lang_name}</option>";
+}
+function makeLangSelector ($item_id, $imgsrc) {
+	$indexphp = 'http://' . htmlspecialchars($_SERVER["HTTP_HOST"]) . "/portal/index.php";
+	$available_langs = $GLOBALS['available_langs'];
+	$options = implode("", array_map("makeLangOption", array_keys($available_langs), $available_langs));
+	return "<div class='main-extra' style='background: url({$imgsrc}) no-repeat left center;'>
+		<form id='langswitch' action='{$indexphp}' method='get' style='display:inline;margin-left:35px'>
+			<select name='lang' style='height:20px;margin:5px 0px' onchange='document.getElementById(\"langswitch\").submit();'>{$options}</select>
+			<input type='hidden' name='id' value='{$item_id}' />
+			<noscript><input type='submit' value='>>'></noscript>
+		</form>
+	</div>";
+}
+
 function makeHeading ($label, $description) {
 	return "<div class='row main-label'>{$label}</div>
 		<div class='row main-desc'>{$description}</div>";
