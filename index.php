@@ -10,7 +10,8 @@
 require "core.php";
 require "getDefaultLanguage.php";
 
-$self = "http://" . htmlspecialchars($_SERVER["HTTP_HOST"]) . "/portal";
+$protocol = ( !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ) ? "https://" : "http://";
+$self = $protocol . htmlspecialchars($_SERVER["HTTP_HOST"]) . "/portal";
 // item id and lang code from url query params
 $item_id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_STRING);// ?: 'Q1';
 $lang_code = getBaseLanguage(filter_input(INPUT_GET, 'lang', FILTER_SANITIZE_STRING) ?: getDefaultLanguage());
