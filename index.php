@@ -65,7 +65,7 @@ echo makeBoxlink(
 echo "</div>";
 
 if ( count($related_items) > 0 ) {
-	echo "<div class='row main-desc'>" . getDeepData($i18n, ['related'], 'Related') . "</div>";
+	echo "<div class='main-desc'>" . getDeepData($i18n, ['related'], 'Related') . "</div>";
 	//print_r($related_items);
 	
 	echo "<div class='row'>";
@@ -82,7 +82,7 @@ if ( count($related_items) > 0 ) {
 }
 
 if ( count($nearby_items) > 0 ) {
-	echo "<div class='row main-desc'>" . getDeepData($i18n, ['nearby'], 'Nearby') . "</div>";
+	echo "<div class='main-desc'>" . getDeepData($i18n, ['nearby'], 'Nearby') . "</div>";
 	//print_r($nearby_items);
 	
 	echo "<div class='row'>";

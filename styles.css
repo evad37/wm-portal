@@ -4,7 +4,7 @@
 }
 
 body {
-    margin: 0; background:#ccf
+    margin: 0;
 }
 
 /* Style the header */
@@ -15,19 +15,55 @@ body {
     text-align: center;
 }
 
-/* Create three equal columns that floats next to each other */
-.column {
-    float: left;
-    width: 33.33%;
-    padding: 10px;
+.row {
+	background: #ccf;
+	display: flex;
+	flex-wrap: wrap;
 }
 
-/* Clear floats after the columns */
-.row:after {
-    content: "";
-    display: table;
-    clear: both;
+/* Responsive layout - 1 to 4 columns based on available width */
+.column {
+    display: flex;
+	width: 25%;
 }
+@media (max-width: 1000px) {
+    .column {
+		width: 33.33%;
+    }
+}
+@media (max-width: 750px) {
+    .column {
+		width: 50%;
+    }
+}
+@media (max-width: 600px) {
+    .column {
+		width: 100%;
+    }
+}
+
+.box-outer {
+	padding: 10px;
+	display: flex;
+    width: 100%;
+    align-content: stretch;
+}
+
+.box {
+    background-color: #eee;
+    border:2px solid #36c;
+	padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 10px;
+	width:100%;
+}
+
+a.box:hover, a.box:active {
+    background-color: #fff;
+}
+
 
 /* Style the footer */
 .footer {
@@ -36,34 +72,8 @@ body {
     text-align: center;
 }
 
-/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
-@media (max-width: 750px) {
-    .column {
-        width: 50%;
-    }
-}
-@media (max-width: 450px) {
-    .column {
-        width: 100%;
-    }
-}
 
-/* Links as boxes */
-a.box:link, a.box:visited {
-    background-color: #eee;/*#36c;*/
-    border:2px solid #36c;
-    /*color: #111;*/
-    /*padding: 14px 25px;*/
-	padding: 10px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    border-radius: 10px;
-	width:100%;
-}
-a.box:hover, a.box:active {
-    background-color: #fff;
-}
+
 
 /* Text styles */
 .main-label {
@@ -89,7 +99,7 @@ a.box:hover, a.box:active {
 	color: #555;
 	line-height: 1.1em;
 	margin-top: 0.2em;
-	min-height: 2.2em;
+	/*min-height: 2.2em;*/
 }
 .small {
 	font-size: 80%;

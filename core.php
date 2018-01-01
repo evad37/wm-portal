@@ -280,18 +280,18 @@ function makeLangSelector ($item_id, $imgsrc) {
 }
 
 function makeHeading ($label, $description) {
-	return "<div class='row main-label'>{$label}</div>
-		<div class='row main-desc'>{$description}</div>";
+	return "<div class='main-label'>{$label}</div>
+		<div class='main-desc'>{$description}</div>";
 }
 
 function makeBoxlink ($url, $logo, $title, $subtitle) {
 	$img = ( $logo ) ? "<img class='logo' src='{$logo}' alt='{$subtitle}'>" : '';
-	return "<div class=column>
+	return "<div class=column><div class='box-outer'>
 	<a class='box' href='{$url}'>
 		{$img}
 		<div class='box-label'>{$title}</div>
 		<div class='box-desc'>{$subtitle}</div>
-	</a></div>";
+	</a></div></div>";
 }
 
 function makefooter ($id) {
