@@ -15,41 +15,57 @@ body {
     text-align: center;
 }
 
-.row {
+/* Responsive layout: Will display a grid with one to four columns based on device width.
+   Html should be laid out as:
+	<div class='flex-grid'>
+		<div class='flex-cell'>
+			<div class='flex-content-wrapper'>
+				<div class='flex-content'>Content1 content1 content1...</div>
+			</div>
+		</div>
+		<div class='flex-cell'>
+			<div class='flex-content-wrapper'>
+				<div class='flex-content'>Content2 content2 content2...</div>
+			</div>
+		</div>
+		... repeat as required ...
+	</div>
+ */
+.flex-grid {
 	background: #ccf;
 	display: flex;
 	flex-wrap: wrap;
+	padding: 5px;
 }
-
-/* Responsive layout - 1 to 4 columns based on available width */
-.column {
+.flex-cell {
     display: flex;
 	width: 25%;
 }
 @media (max-width: 1000px) {
-    .column {
+    .flex-cell {
 		width: 33.33%;
     }
 }
 @media (max-width: 750px) {
-    .column {
+    .flex-cell {
 		width: 50%;
     }
 }
 @media (max-width: 600px) {
-    .column {
+    .flex-cell {
 		width: 100%;
     }
 }
 
-.box-outer {
+/* Spacing around boxes in the grid, expands to fill available height */
+.flex-content-wrapper {
 	padding: 10px;
 	display: flex;
     width: 100%;
     align-content: stretch;
 }
 
-.box {
+.flex-content {
     background-color: #eee;
     border:2px solid #36c;
 	padding: 5px;
@@ -60,10 +76,9 @@ body {
 	width:100%;
 }
 
-a.box:hover, a.box:active {
+a.flex-content:hover, a.flex-content:active {
     background-color: #fff;
 }
-
 
 /* Style the footer */
 .footer {
@@ -71,9 +86,6 @@ a.box:hover, a.box:active {
     padding: 10px;
     text-align: center;
 }
-
-
-
 
 /* Text styles */
 .main-label {
@@ -89,17 +101,16 @@ a.box:hover, a.box:active {
 	font-size: 120%;
 	padding: 2px 20px;
 }
-.box-label {
+.label {
 	font-size: 110%;
 	font-weight: bold;
 	color: #36c;
 }
-.box-desc {
+.desc {
 	font-size: 90%;
 	color: #555;
 	line-height: 1.1em;
 	margin-top: 0.2em;
-	/*min-height: 2.2em;*/
 }
 .small {
 	font-size: 80%;

@@ -44,7 +44,7 @@ echo makeHeading(
 	$item_desc
 );
 
-echo "<div class='row'>";
+echo "<div class='flex-grid'>";
 if ( isset($item_data["sitelinks"]) ) {
 	foreach ($item_data["sitelinks"] as $site => $site_info) {
 		$sitetype = getSiteType($site);
@@ -68,7 +68,7 @@ if ( count($related_items) > 0 ) {
 	echo "<div class='main-desc'>" . getDeepData($i18n, ['related'], 'Related') . "</div>";
 	//print_r($related_items);
 	
-	echo "<div class='row'>";
+	echo "<div class='flex-grid'>";
 	
 	foreach ($related_items as $r) {
 		echo makeBoxlink(
@@ -85,7 +85,7 @@ if ( count($nearby_items) > 0 ) {
 	echo "<div class='main-desc'>" . getDeepData($i18n, ['nearby'], 'Nearby') . "</div>";
 	//print_r($nearby_items);
 	
-	echo "<div class='row'>";
+	echo "<div class='flex-grid'>";
 	
 	foreach ($nearby_items as $n) {
 		echo makeBoxlink(

@@ -286,12 +286,15 @@ function makeHeading ($label, $description) {
 
 function makeBoxlink ($url, $logo, $title, $subtitle) {
 	$img = ( $logo ) ? "<img class='logo' src='{$logo}' alt='{$subtitle}'>" : '';
-	return "<div class=column><div class='box-outer'>
-	<a class='box' href='{$url}'>
-		{$img}
-		<div class='box-label'>{$title}</div>
-		<div class='box-desc'>{$subtitle}</div>
-	</a></div></div>";
+	return "<div class='flex-cell'>
+		<div class='flex-content-wrapper'>
+			<a class='flex-content' href='{$url}'>
+				{$img}
+				<div class='label'>{$title}</div>
+				<div class='desc'>{$subtitle}</div>
+			</a>
+		</div>
+	</div>";
 }
 
 function makefooter ($id) {
