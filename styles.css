@@ -4,7 +4,7 @@
 }
 
 body {
-    margin: 0; background:#ccf
+    margin: 0;
 }
 
 /* Style the header */
@@ -15,18 +15,69 @@ body {
     text-align: center;
 }
 
-/* Create three equal columns that floats next to each other */
-.column {
-    float: left;
-    width: 33.33%;
-    padding: 10px;
+/* Responsive layout: Will display a grid with one to four columns based on device width.
+   Html should be laid out as:
+	<div class='flex-grid'>
+		<div class='flex-cell'>
+			<div class='flex-content-wrapper'>
+				<div class='flex-content'>Content1 content1 content1...</div>
+			</div>
+		</div>
+		<div class='flex-cell'>
+			<div class='flex-content-wrapper'>
+				<div class='flex-content'>Content2 content2 content2...</div>
+			</div>
+		</div>
+		... repeat as required ...
+	</div>
+ */
+.flex-grid {
+	background: #ccf;
+	display: flex;
+	flex-wrap: wrap;
+	padding: 5px;
+}
+.flex-cell {
+    display: flex;
+	width: 25%;
+}
+@media (max-width: 1000px) {
+    .flex-cell {
+		width: 33.33%;
+    }
+}
+@media (max-width: 750px) {
+    .flex-cell {
+		width: 50%;
+    }
+}
+@media (max-width: 600px) {
+    .flex-cell {
+		width: 100%;
+    }
 }
 
-/* Clear floats after the columns */
-.row:after {
-    content: "";
-    display: table;
-    clear: both;
+/* Spacing around boxes in the grid, expands to fill available height */
+.flex-content-wrapper {
+	padding: 10px;
+	display: flex;
+    width: 100%;
+    align-content: stretch;
+}
+
+.flex-content {
+    background-color: #eee;
+    border:2px solid #36c;
+	padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 10px;
+	width:100%;
+}
+
+a.flex-content:hover, a.flex-content:active {
+    background-color: #fff;
 }
 
 /* Style the footer */
@@ -34,35 +85,6 @@ body {
     background-color: #f1f1f1;
     padding: 10px;
     text-align: center;
-}
-
-/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
-@media (max-width: 750px) {
-    .column {
-        width: 50%;
-    }
-}
-@media (max-width: 450px) {
-    .column {
-        width: 100%;
-    }
-}
-
-/* Links as boxes */
-a.box:link, a.box:visited {
-    background-color: #eee;/*#36c;*/
-    border:2px solid #36c;
-    /*color: #111;*/
-    /*padding: 14px 25px;*/
-	padding: 10px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    border-radius: 10px;
-	width:100%;
-}
-a.box:hover, a.box:active {
-    background-color: #fff;
 }
 
 /* Text styles */
@@ -79,17 +101,16 @@ a.box:hover, a.box:active {
 	font-size: 120%;
 	padding: 2px 20px;
 }
-.box-label {
+.label {
 	font-size: 110%;
 	font-weight: bold;
 	color: #36c;
 }
-.box-desc {
+.desc {
 	font-size: 90%;
 	color: #555;
 	line-height: 1.1em;
 	margin-top: 0.2em;
-	min-height: 2.2em;
 }
 .small {
 	font-size: 80%;
