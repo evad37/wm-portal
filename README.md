@@ -10,10 +10,10 @@ Updating
 This tool is located on the Wikimedia Toolforge, at https://tools.wmflabs.org/portal/.
 To update:
 <ol>
-<li>login with to toolforge with ssh: <code>$ ssh -i ~/.ssh/id_rsa <i>user</i>@login.tools.wmflabs.org</code></li>
-<li>become the tool account: <code>$ become portal</code></li>
-<li>Clone from GitHub repo into the <code>public_html</code> folder: <code>$ git clone https://github.com/evad37/wm-portal.git public_html</code></li>
-<li>If the <code>.lighttpd.conf</code> file has changed, that file needs to be copied to the root directory</li>
+<li>login with to toolforge with ssh:<p><code>$ ssh -i ~/.ssh/id_rsa <i>user</i>@login.tools.wmflabs.org</code></li>
+<li>become the tool account:<p><code>$ become portal</code></li>
+<li>Pull from GitHub repo into the <code>public_html</code> folder:<p><code>$ cd public_html<p>$ git pull</code></li>
+<li>If the <code>.lighttpd.conf</code> file has changed, that file needs to be copied to the root directory:<p><code>$ cp public_html/.lighttpd.conf .lighttpd.conf</code></li>
 </ol>
 
 Notes
