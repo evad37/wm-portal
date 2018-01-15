@@ -10,10 +10,11 @@ Updating
 This tool is located on the Wikimedia Toolforge, at https://tools.wmflabs.org/portal/.
 To update:
 <ol>
-<li>login with to toolforge with ssh:<p><code>$ ssh -i ~/.ssh/id_rsa <i>user</i>@login.tools.wmflabs.org</code></li>
-<li>become the tool account:<p><code>$ become portal</code></li>
+<li>Login with to toolforge with ssh:<p><code>$ ssh -i ~/.ssh/id_rsa <i>user</i>@login.tools.wmflabs.org</code></li>
+<li>Become the tool account:<p><code>$ become portal</code></li>
 <li>Pull from GitHub repo into the <code>public_html</code> folder:<p><code>$ cd public_html<p>$ git pull</code></li>
 <li>If the <code>.lighttpd.conf</code> file has changed, that file needs to be copied to the root directory:<p><code>$ cp public_html/.lighttpd.conf .lighttpd.conf</code></li>
+<li>Restart the webservice:<p><code>$ webservice stop<p>$ webservice start</code>
 </ol>
 
 Notes
@@ -26,7 +27,7 @@ This maps to <code>{base-url}/portal/index.php?id={item}&lang={lang-code}</code>
 
 Item titles, descriptions, and sitelinks are retrieved from the Wikidata api.
 
-I18n: labels and descriptions from Wikidata are already be in the correct langauge. Other strings are pulled from json files. If the language is not specified, the device language is detected.
+I18n: labels and descriptions from Wikidata are already in the correct langauge. Other strings are pulled from json files. If the language is not specified, the device language is detected.
 
 Mock output for <a href=https://www.wikidata.org/wiki/Q1129708>Q1129708</a>/en:
 -----------
