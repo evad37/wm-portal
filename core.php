@@ -283,7 +283,7 @@ function makeLangSelector ($item_id, $imgsrc, $lang_code, $available_langs) {
 			<noscript><input type='submit' value='>>'></noscript>
 		</form>
 	</div>";
-}//<input type='hidden' name='id' value='{$item_id}' />
+}
 
 function makeHeading ($label, $description) {
 	return "<div class='main-label'>{$label}</div>
