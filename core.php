@@ -262,18 +262,24 @@ function lookupMultipleItemsData($related_ids, $lang_code) {
 
 /* ---------- Formatting ------------------------------------------------------------------------ */
 function makeLangOption($lang, $lang_name) {
-	$current_lang = $GLOBALS['lang_code'];
+	$current_lang =  $GLOBALS['lang_code'];
 	$selected = ( $lang === $current_lang ) ? ' selected' : '';
 	return "<option value='{$lang}'{$selected}>{$lang}: {$lang_name}</option>";
 }
-function makeLangSelector ($item_id, $imgsrc) {
-	$indexphp = 'http://' . htmlspecialchars($_SERVER["HTTP_HOST"]) . "/portal/index.php";
-	$available_langs = $GLOBALS['available_langs'];
-	$options = implode("", array_map("makeLangOption", array_keys($available_langs), $available_langs));
+function makeLangSelector ($item_id, $imgsrc, $lang_code, $available_langs) {
+	$indexphp = $GLOBALS['self'] . "/index.php";
+	$options_array = array_map("makeLangOption", array_keys($available_langs), $available_langs);
+	if ( !isset($available_langs[$lang_code]) ) {
+		array_push($options_array, makeLangOption($lang_code, 'Unknown language'));
+	}
+	$options = implode("", $options_array);
 	return "<div class='main-extra' style='background: url({$imgsrc}) no-repeat left center;'>
 		<form id='langswitch' action='{$indexphp}' method='get' style='display:inline;margin-left:35px'>
-			<select name='lang' style='height:20px;margin:5px 0px' onchange='document.getElementById(\"langswitch\").submit();'>{$options}</select>
 			<input type='hidden' name='id' value='{$item_id}' />
+			<select name='lang' style='height:20px;margin:5px 0px' onchange='document.getElementById(\"langswitch\").submit();'>
+				{$options}
+			</select>
+			
 			<noscript><input type='submit' value='>>'></noscript>
 		</form>
 	</div>";

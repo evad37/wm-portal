@@ -40,7 +40,7 @@ $nearby_items  = lookupMultipleItemsData( lookupNearbyItemIds( lookupCoords($ite
 
 
 echo makeHeading(
-	$item_label . makeLangSelector($item_id, "{$self}/images/language_selection.png"),
+	$item_label . makeLangSelector($item_id, "{$self}/images/language_selection.png", $lang_code, $available_langs),
 	$item_desc
 );
 
@@ -57,7 +57,7 @@ if ( isset($item_data["sitelinks"]) ) {
 	}
 }
 echo makeBoxlink(
-	"https://tools.wmflabs.org/reasonator/?q={$item_id}",
+	"https://tools.wmflabs.org/reasonator/?q={$item_id}&lang={$lang_code}",
 	"{$self}/images/reasonator.png",
 	getDeepData($i18n, ['reasonator', 'type'], 'Data'),
 	getDeepData($i18n, ['reasonator', 'name'], 'Reasonator')
