@@ -2,6 +2,7 @@
 <li>Language selector icon (<a href='https://commons.wikimedia.org/wiki/File:WMF-Agora-Language_selection-crop_3492D1.svg'>source</a>) by Pau Giner: <a href='https://creativecommons.org/publicdomain/zero/1.0/deed.en'>CC0 Universal Public Domain Dedication</a></li>
 <li>Wikimedia site icons ™ Wikimedia Foundation, Inc. (used in this project under the terms of the <a href='https://wikimediafoundation.org/wiki/Trademark_policy'>Trademark policy</a>, section 3.6):
 <ul style=text-align:left;margin-top:5px>
+<li>Wikibooks icon (<a href='https://commons.wikimedia.org/wiki/File:Notification-icon-Wikibooks-logo.svg'>source</a>) by 	User:Jdforrester (WMF), User:Ramac, User:Bastique: <a href='https://creativecommons.org/licenses/by-sa/3.0/deed.en'>CC-BY-SA 3.0 Unported license</a></li>
 <li>Wikimedia Commons icon (<a href='https://commons.wikimedia.org/wiki/File:Notification-icon-Commons-logo.svg'>source</a>) by User:Jdforrester (WMF), User:3247, User:Reidab: Public domain</li>
 <li>Wikipedia icon (<a href='https://commons.wikimedia.org/wiki/File:Notification-icon-Wikipedia-logo.svg'>source</a>) by User:Jdforrester (WMF), Jonathan Hoefler: Public domain</li>
 <li>Wikisource icon (<a href='https://commons.wikimedia.org/wiki/File:Notification-icon-Wikisource-logo.svg'>source</a>) by User:Jdforrester (WMF), User:Rei-artur, Nicholas Moreau: <a href='https://creativecommons.org/licenses/by-sa/3.0/deed.en'>CC-BY-SA 3.0 Unported license</a></li>
