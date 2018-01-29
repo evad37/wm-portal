@@ -12,39 +12,39 @@
 		"type": "Données"
 	},
 	"wikibooks": {
-		"name": "",
-		"type": ""
+		"name": "Wikibooks",
+		"type": "Manuel scolaire"
 	},
 	"wikinews": {
-		"name": "",
-		"type": ""
+		"name": "Wikinews",
+		"type": "Actualités"
 	},
 	"wikipedia": {
 		"name": "Wikipédia",
 		"type": "Article"
 	},
 	"wikiquote": {
-		"name": "",
-		"type": ""
+		"name": "Wikiquote",
+		"type": "Citations"
 	},
 	"wikisource": {
 		"name": "Wikisource",
 		"type": "Texte source"
 	},
 	"wikispecies": {
-		"name": "",
-		"type": ""
+		"name": "Wikispecies",
+		"type": "Référence taxonomique"
 	},
 	"wikiversity": {
-		"name": "",
-		"type": ""
+		"name": "Wikiversité",
+		"type": "Ressources d'apprentissage"
 	},	
 	"wikivoyage": {
 		"name": "Wikivoyage",
 		"type": "Guide touristique"
 	},
 	"wiktionary": {
-		"name": "",
-		"type": ""
+		"name": "Wiktionnaire",
+		"type": "Entrée du dictionnaire"
 	}
 }
