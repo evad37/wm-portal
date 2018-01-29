@@ -2,19 +2,7 @@
 	"related": "Articles connexes",
 	"nearby": "Articles à proximité",
 	"nolabel": "pas de label",
-	
-	"wikipedia": {
-		"name": "Wikipédia",
-		"type": "Article"
-	},
-	"wikivoyage": {
-		"name": "Wikivoyage",
-		"type": "Guide touristique"
-	},
-	"wikisource": {
-		"name": "Wikisource",
-		"type": "Texte source"
-	},
+
 	"commons": {
 		"name": "Wikimédia Commons",
 		"type": "Multimédia"
@@ -22,5 +10,41 @@
 	"reasonator": {
 		"name": "Reasonator",
 		"type": "Données"
+	},
+	"wikibooks": {
+		"name": "",
+		"type": ""
+	},
+	"wikinews": {
+		"name": "",
+		"type": ""
+	},
+	"wikipedia": {
+		"name": "Wikipédia",
+		"type": "Article"
+	},
+	"wikiquote": {
+		"name": "",
+		"type": ""
+	},
+	"wikisource": {
+		"name": "Wikisource",
+		"type": "Texte source"
+	},
+	"wikispecies": {
+		"name": "",
+		"type": ""
+	},
+	"wikiversity": {
+		"name": "",
+		"type": ""
+	},	
+	"wikivoyage": {
+		"name": "Wikivoyage",
+		"type": "Guide touristique"
+	},
+	"wiktionary": {
+		"name": "",
+		"type": ""
 	}
 }

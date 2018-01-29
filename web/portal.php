@@ -1,6 +1,6 @@
 <?php
 
-$item_data = $api->lookupItemData($item_id, $lang_code);
+$item_data = $api->lookupItemData($item_id, $lang_code, $sites);
 $item_label = getDeepData($item_data, ["labels", $lang_code, "value"], "({$item_id}: {$i18n['nolabel']})");
 $item_desc  = getDeepData($item_data, ["descriptions", $lang_code, "value"]); 
 $related_items = $api->lookupMultipleItemsData(
@@ -22,7 +22,7 @@ echo makeSubheading($item_desc);
 echo "<div class='flex-grid'>";
 if ( isset($item_data["sitelinks"]) ) {
 	foreach ($item_data["sitelinks"] as $site => $site_info) {
-		$sitetype = getSiteType($site);
+		$sitetype = $site_types[$site];
 		echo makeBoxlink(
 			$site_info["url"],
 			"{$self}/img/{$sitetype}.png",

@@ -1,8 +1,7 @@
 <?php
 require "inc/helpers.php";
-require "inc/formatting.php";
-require "inc/api.php";
 require "inc/external/getDefaultLanguage.php";
+require "inc/formatting.php";
 
 $protocol = ( !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ) ? "https://" : "http://";
 $self = $protocol . htmlspecialchars($_SERVER["HTTP_HOST"]) . "/portal";
@@ -15,6 +14,9 @@ if ( !preg_match("/^Q\d+$/", $item_id) ) {
 	require "web/about.php";
 	die();
 }
+
+require "inc/sites.php";
+require "inc/api.php";
 
 $available_langs = json_decode(file_get_contents("i18n/_langs.json"), true);
 if ( !isset($available_langs[$lang_code]) ) {

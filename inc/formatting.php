@@ -59,20 +59,19 @@ function makeBoxlink ($url, $logo, $title, $subtitle) {
 
 function makefooter ($id = false) {
 	$itemlink = ( $id ) ? ": <a href='https://www.wikidata.org/wiki/{$id}'>{$id}</a>" : '';
+	
+	$imagecredits = makeImgCredits();
+	
 	return "<div class='footer small'>
 	The Free Knowledge Portal uses data from <a href='https://www.wikidata.org/'>Wikidata</a>{$itemlink}.
 	<br>
 	Text is available under the terms of the <a href=https://creativecommons.org/publicdomain/zero/1.0/CC0 license>Creative Commons CC0 License</a>.
-	<br>
-	<a href='https://commons.wikimedia.org/wiki/File:Reasonator_logo_proposal.png'>Reasonator icon</a> by CristianCantoro: <a href='https://creativecommons.org/licenses/by-sa/3.0/deed.en'>CC-BY-SA 3.0 Unported license</a></li>
-	<br>
-	Wikimedia site icons ™ Wikimedia Foundation, Inc. (used here under the <a href='https://wikimediafoundation.org/wiki/Trademark_policy'>Trademark policy</a>, section 3.6):
+	<br>	
+	Wikimedia site icons ™ Wikimedia Foundation, Inc. (used here under the <a href='https://wikimediafoundation.org/wiki/Trademark_policy'>Trademark policy</a>, section 3.6)
 	<ul style=text-align:left;margin-top:5px>
-	<li><a href='https://commons.wikimedia.org/wiki/File:Notification-icon-Commons-logo.svg'>Wikimedia Commons icon</a> by User:Jdforrester (WMF), User:3247, User:Reidab: Public domain</li>
-	<li><a href='https://commons.wikimedia.org/wiki/File:Notification-icon-Wikipedia-logo.svg'>Wikipedia icon</a> by User:Jdforrester (WMF), Jonathan Hoefler: Public domain</li>
-	<li><a href='https://commons.wikimedia.org/wiki/File:Notification-icon-Wikisource-logo.svg'>Wikisource icon</a> by User:Jdforrester (WMF), User:Rei-artur, Nicholas Moreau: <a href='https://creativecommons.org/licenses/by-sa/3.0/deed.en'>CC-BY-SA 3.0 Unported license</a></li>
-	<li><a href='https://commons.wikimedia.org/wiki/File:Notification-icon-Wikivoyage-logo.svg'>Wikivoyage icon</a> by User:Jdforrester (WMF), User:AleXXw, User:‎Danapit:  <a href='https://creativecommons.org/licenses/by-sa/3.0/deed.en'>CC-BY-SA 3.0 Unported license</a></li>
-	</ul>";
+	{$imagecredits}
+	</ul>
+	</div>";
 }
 
 ?>
