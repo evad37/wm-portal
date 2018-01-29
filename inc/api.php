@@ -61,7 +61,7 @@ class ApiDecorator
 		$this->api = new Api(); 
 	}
 
-	function lookupItemData ($item_id, $lang_code) {
+	function lookupItemData ($item_id, $lang_code, $sites) {
 		$result = $this->api->get([
 			"action" => "wbgetentities",
 			"format" => "json",
@@ -69,7 +69,7 @@ class ApiDecorator
 			"redirects" => "yes",
 			"props" => "labels|descriptions|sitelinks|sitelinks/urls",
 			"languages" => $lang_code,
-			"sitefilter" => "{$lang_code}wiki|{$lang_code}wikivoyage|{$lang_code}wikisource|commonswiki"
+			"sitefilter" => implode("|", $sites)
 		]);
 		
 		if ( !isset($result["entities"]) || !isset($result["entities"][$item_id]) ) {
