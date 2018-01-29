@@ -10,11 +10,11 @@ Updating
 This tool is located on the Wikimedia Toolforge, at https://tools.wmflabs.org/portal/.
 To update:
 <ol>
-<li>Login with to toolforge with ssh:<p><code>$ ssh -i ~/.ssh/id_rsa <i>user</i>@login.tools.wmflabs.org</code></li>
-<li>Become the tool account:<p><code>$ become portal</code></li>
-<li>Pull from GitHub repo into the <code>public_html</code> folder:<p><code>$ cd public_html<p>$ git pull</code></li>
-<li>If the <code>.lighttpd.conf</code> file has changed, that file needs to be copied to the root directory:<p><code>$ cp public_html/.lighttpd.conf .lighttpd.conf</code></li>
-<li>Restart the webservice:<p><code>$ webservice stop<p>$ webservice start</code>
+<li>Login with to toolforge with ssh:<p><code>$</code> <code>ssh -i ~/.ssh/id_rsa <i>user</i>@login.tools.wmflabs.org</code></li>
+<li>Become the tool account:<p><code>$</code> <code>become portal</code></li>
+<li>Pull from GitHub repo into the <code>public_html</code> folder:<p><code>$ </code> <code>cd public_html<p>$</code> <code>git pull</code></li>
+<li>If the <code>.lighttpd.conf</code> file has changed, that file needs to be copied to the root directory:<p><code>$</code> <code>cp public_html/.lighttpd.conf .lighttpd.conf</code></li>
+<li>Restart the webservice:<p><code>$</code> <code>webservice stop<p>$</code> <code>webservice start</code>
 </ol>
 
 Notes
