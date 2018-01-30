@@ -3,7 +3,7 @@ require "inc/helpers.php";
 require "inc/external/getDefaultLanguage.php";
 require "inc/formatting.php";
 
-$protocol = ( !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ) ? "https://" : "http://";
+$protocol = ( htmlspecialchars($_SERVER['HTTP_HOST']) == 'localhost' ) ? "http://" : "https://";
 $self = $protocol . htmlspecialchars($_SERVER["HTTP_HOST"]) . "/portal";
 // item id and lang code from url query params
 $item_id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_STRING);
