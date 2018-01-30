@@ -131,3 +131,20 @@ code {
 	width: 50px;
 	float:left;
 }
+
+/* Lable layout for QR generator */
+.label-desktop {
+	display:block;
+}
+.label-mobile {
+	display:none;
+}
+@media (max-width: 600px) {
+	.label-desktop {
+		display:none;
+	}
+	.label-mobile {
+		display:block;
+		margin-top:0.2em;
+	}
+}

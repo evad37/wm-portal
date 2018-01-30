@@ -11,7 +11,11 @@ $lang_code = getBaseLanguage(filter_input(INPUT_GET, 'lang', FILTER_SANITIZE_STR
 
 // When there's no valid item id, show the about page instead 
 if ( !preg_match("/^Q\d+$/", $item_id) ) {
+	echo_html_top();
 	require "web/about.php";
+	require "web/qr.php";
+	echo makefooter();
+	echo "</body></html>";
 	die();
 }
 
