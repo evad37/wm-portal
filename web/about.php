@@ -7,7 +7,8 @@
 	echo (
 		"<p style='text-align:center'>
 		Try <a href={$self}/Q100>{$self}/Q100</a> (or any other Wikidata item id) to see this tool in action.<br>
-		Or try <a href={$self}/Q100>{$self}/Q100/fr</a> (or any other language) to see it in another language.
+		Or try <a href={$self}/Q100>{$self}/Q100/fr</a> (or any other language) to see it in another language.<br>
+		Or use a page title and site code: <a href={$self}?title=Boston&site=enwiki>{$self}/?title=Boston&site=enwiki</a>.
 		</p>"
 	);
 ?>
