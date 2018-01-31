@@ -25,7 +25,7 @@ if ( !preg_match("/^Q\d+$/", $item_id) && !$has_title_and_site ) {
 require "inc/sites.php";
 require "inc/api.php";
 
-// Backwards compatibility when  given instead of id
+// Backwards compatibility, when given page title & site instead of id
 if ( !$item_id && $has_title_and_site ) {
 	$page_id = $api->lookupIdForPage($page_title, $page_site);
 	if ( !preg_match("/^Q\d+$/", $page_id) ) {
