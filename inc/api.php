@@ -49,8 +49,6 @@ class Api
     }
 }
 
-//$_api = new Api();
-
 /* ---------- Requests -------------------------------------------------------------------------- */
 class ApiDecorator
 {
@@ -176,6 +174,19 @@ class ApiDecorator
 		};
 		
 		return array_map($simplifyItemData, array_keys($entities), $entities);
+	}
+	
+	function lookupIdForPage($title, $site) {
+		$result = $this->api->get([
+			"action" => "wbgetentities",
+			"format" => "json",
+			"sites" => $site,
+			"titles" => $title,
+			"redirects" => "yes",
+			"props" => ""		
+		]);
+		$id = array_keys($result["entities"])[0];
+		return $id;
 	}
 
 }
