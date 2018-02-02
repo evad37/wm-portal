@@ -1,0 +1,50 @@
+{
+	"related": "Verwandte Artikel",
+	"nearby": "Gegenstände in der Nähe",
+	"nolabel": "kein Etikett",
+
+	"commons": {
+		"name": "Wikimedia Commons",
+		"type": "Mediendateien"
+	},
+	"reasonator": {
+		"name": "Reasonator",
+		"type": "Daten"
+	},
+	"wikibooks": {
+		"name": "Wikibooks",
+		"type": "Lehrbuch"
+	},
+	"wikinews": {
+		"name": "Wikinews",
+		"type": "Neuigkeiten"
+	},
+	"wikipedia": {
+		"name": "Wikipedia",
+		"type": "Artikel"
+	},
+	"wikiquote": {
+		"name": "Wikiquote",
+		"type": "Zitate"
+	},
+	"wikisource": {
+		"name": "Wikisource",
+		"type": "Quellentexte"
+	},
+	"wikispecies": {
+		"name": "Wikispecies",
+		"type": "Taxonomische Referenz"
+	},
+	"wikiversity": {
+		"name": "Wikiversity",
+		"type": "Lernressourcen"
+	},	
+	"wikivoyage": {
+		"name": "Wikivoyage",
+		"type": "Reiseführer"
+	},
+	"wiktionary": {
+		"name": "Wiktionary",
+		"type": "Wörterbucheintrag"
+	}
+}

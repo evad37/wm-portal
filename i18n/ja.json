@@ -1,0 +1,50 @@
+{
+	"related": "関連するアイテム",
+	"nearby": "「近くのアイテム」",
+	"nolabel": "ラベルなし",
+
+	"commons": {
+		"name": "ウィキメディア・コモンズ",
+		"type": "メディアファイル"
+	},
+	"reasonator": {
+		"name": "Reasonator",
+		"type": "データ"
+	},
+	"wikibooks": {
+		"name": "ウィキブックス",
+		"type": "教科書"
+	},
+	"wikinews": {
+		"name": "ウィキニュース",
+		"type": "ニュース"
+	},
+	"wikipedia": {
+		"name": "ウィキペディア",
+		"type": "記事"
+	},
+	"wikiquote": {
+		"name": "ウィキクォート",
+		"type": "引用"
+	},
+	"wikisource": {
+		"name": "ウィキソース",
+		"type": "ソーステキスト"
+	},
+	"wikispecies": {
+		"name": "ウィキスピーシーズ",
+		"type": "「分類学の参照」"
+	},
+	"wikiversity": {
+		"name": "ウィキバーシティ",
+		"type": "学習リソース"
+	},	
+	"wikivoyage": {
+		"name": "ウィキボヤージュ",
+		"type": "旅行ガイド"
+	},
+	"wiktionary": {
+		"name": "ウィクショナリー",
+		"type": "辞書エントリ"
+	}
+}
