@@ -73,7 +73,9 @@ if ( count($nearby_items) > 0 ) {
 	echo "</div>";
 }
 
-echo makefooter($item_id);
+$sites_used = array_map($mapToSiteType, array_keys($item_data["sitelinks"]));
+//print_r( array_flip($sites_used) ); echo '<hr><hr><hr>';
+echo makefooter($item_id, array_flip($sites_used));
 //print_r($result);
 
 ?>

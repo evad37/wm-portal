@@ -57,17 +57,24 @@ function makeBoxlink ($url, $logo, $title, $subtitle) {
 	</div>";
 }
 
-function makefooter ($id = false) {
+function makefooter ($id = false, $sites_used = []) {
 	$itemlink = ( $id ) ? ": <a href='https://www.wikidata.org/wiki/{$id}'>{$id}</a>" : '';
 	
-	$imagecredits = makeImgCredits();
+	$default_images = ( $id ) ? ['reasonator'=>true] : [];
+	$imgs_used = array_merge($default_images, $sites_used);
+	
+	$tm_note = ( count($imgs_used) === 0 ) ? '' : "<br>	
+		Wikimedia site icons ™ Wikimedia Foundation, Inc. (used here under the
+		<a href='https://wikimediafoundation.org/wiki/Trademark_policy'>Trademark policy</a>,
+		section 3.6)";
+	$imagecredits = makeImgCredits($imgs_used);
 	
 	return "<div class='footer small'>
 	The Free Knowledge Portal uses data from <a href='https://www.wikidata.org/'>Wikidata</a>{$itemlink}.
 	<br>
-	Text is available under the terms of the <a href=https://creativecommons.org/publicdomain/zero/1.0/CC0 license>Creative Commons CC0 License</a>.
-	<br>	
-	Wikimedia site icons ™ Wikimedia Foundation, Inc. (used here under the <a href='https://wikimediafoundation.org/wiki/Trademark_policy'>Trademark policy</a>, section 3.6)
+	Source code is <a href='https://github.com/evad37/wm-portal'>available on Github</a>;
+	Text is available under the terms of the <a href='https://creativecommons.org/publicdomain/zero/1.0/CC0 license'>Creative Commons CC0 License</a>.
+	{$tm_note}
 	<ul style=text-align:left;margin-top:5px>
 	{$imagecredits}
 	</ul>

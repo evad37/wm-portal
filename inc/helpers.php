@@ -69,53 +69,48 @@ function joinWithPipes($v1, $v2) {
 }
 
 function parseImgCredits() {
-	$txt_file    = file_get_contents('img/CREDITS');
-	$images      = explode("*", $txt_file);
+	$credits = json_decode(file_get_contents("img/CREDITS.json"), true);
+	$licences = $credits["licences"];
+	$images = $credits["images"];
 	
-	function parseRow($image) {
-		if ( strlen($image) < 1 ) {
-			return [];
-		}
+	$parseRow = function ($name, $image_data) use ($licences) {
 		
-		$images_data = explode("\n", $image);
-		//print_r($images_data);
-		//echo "<br><br>";
-		
-		$name = trim(preg_replace('/.+ <(.+)\.\w{3}>:/', '$1', $images_data[0]));
-		$description = trim(preg_replace('/(.+) <.+>:/', '$1', $images_data[0]));
-		$source = trim(preg_replace('/ Source: <(.+)>/', '$1', $images_data[1]));
-		$authors = trim(preg_replace('/ Author\(s\): (.+)/', '$1', $images_data[2]));
-		$licence = trim(preg_replace('/ Licence: (.+) <.+>/', '$1', $images_data[3]));
-		$licenceurl = trim(preg_replace('/ Licence: .+ <(.+)>/', '$1', $images_data[3]));
+		$licence = $licences[ $image_data["license"] ];
 	
 		return [
 			"name" => $name,
-			"description" => $description,
-			"source" => $source,
-			"authors" => $authors,
-			"licence" => $licence,
-			"licenceurl" => $licenceurl 
+			"title" => $image_data["title"],
+			"source" =>  $image_data["source"],
+			"authors" => $image_data["authors"],
+			"licence" => $licence["name"],
+			"licenceurl" => $licence["url"]
 		];
-	}
+	};
 	
-	return array_map("parseRow", $images);
+	return array_map($parseRow, array_keys($images), $images);
 }
 
-function makeImgCredits($names = ['language_selection']) {
+function makeImgCredits($imgs_used = []) {
 	$parsed_data = parseImgCredits();
 	
-	echo '<hr>';
-	//print_r($parsed_data);
+	//$imgs_used = array_flip($imgs_array);
+	
+	//echo '<hr>';
+	//print_r($imgs_used); echo '<hr>';
 	
 	
-	$needsCredit = function ($imgData) use ($names) {
-		return isset($imgData["name"]);
-		//return isset($imgData["name"]) && isset($names[$imgData["name"]]);
+	$needsCredit = function ($imgData) use ($imgs_used) {
+		//return true;//isset($imgData["name"]);
+		
+		//print_r($names);
+		//echo "<br/><br/>function \$needsCredit: {$imgData["name"]} :<br/>";
+		//print_r( getDeepData($imgs_used, [$imgData["name"]], false)); echo '<hr><hr>';
+		return getDeepData($imgs_used, [$imgData["name"]], false) !== false;
+		//return isset($names);
 	};
 	
 	$makeCreditLine = function ($imgData) {
-		$licence = ( isset($imgData['licenceurl']) ) ? "<a href={$imgData['licenceurl']}>{$imgData['licence']}</a>" : $imgData['licence'];
-		return "<li><a href={$imgData['source']}>{$imgData['description']}</a> by {$imgData['authors']}: {$licence}</li>";
+		return "<li><a href={$imgData['source']}>{$imgData['title']}</a> by {$imgData['authors']}: <a href={$imgData['licenceurl']}>{$imgData['licence']}</a></li>";
 	};
 	
 	return implode( array_map($makeCreditLine, array_filter($parsed_data, $needsCredit)) );
