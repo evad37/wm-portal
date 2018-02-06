@@ -93,20 +93,8 @@ function parseImgCredits() {
 function makeImgCredits($imgs_used = []) {
 	$parsed_data = parseImgCredits();
 	
-	//$imgs_used = array_flip($imgs_array);
-	
-	//echo '<hr>';
-	//print_r($imgs_used); echo '<hr>';
-	
-	
 	$needsCredit = function ($imgData) use ($imgs_used) {
-		//return true;//isset($imgData["name"]);
-		
-		//print_r($names);
-		//echo "<br/><br/>function \$needsCredit: {$imgData["name"]} :<br/>";
-		//print_r( getDeepData($imgs_used, [$imgData["name"]], false)); echo '<hr><hr>';
 		return getDeepData($imgs_used, [$imgData["name"]], false) !== false;
-		//return isset($names);
 	};
 	
 	$makeCreditLine = function ($imgData) {

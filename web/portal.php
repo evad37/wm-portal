@@ -40,11 +40,8 @@ echo makeBoxlink(
 echo "</div>";
 
 if ( count($related_items) > 0 ) {
-	echo makeSubheading( getDeepData($i18n, ['related'], 'Related') );
-	//print_r($related_items);
-	
+	echo makeSubheading( getDeepData($i18n, ['related'], 'Related') );	
 	echo "<div class='flex-grid'>";
-	
 	foreach ($related_items as $r) {
 		echo makeBoxlink(
 			"{$self}/{$r['item']}/{$lang_code}",
@@ -58,10 +55,7 @@ if ( count($related_items) > 0 ) {
 
 if ( count($nearby_items) > 0 ) {
 	echo makeSubheading( getDeepData($i18n, ['nearby'], 'Nearby') );
-	//print_r($nearby_items);
-	
-	echo "<div class='flex-grid'>";
-	
+	echo "<div class='flex-grid'>";	
 	foreach ($nearby_items as $n) {
 		echo makeBoxlink(
 			"{$self}/{$n['item']}/{$lang_code}",
@@ -73,10 +67,8 @@ if ( count($nearby_items) > 0 ) {
 	echo "</div>";
 }
 
-$sites_used = array_map($mapToSiteType, array_keys($item_data["sitelinks"]));
-//print_r( array_flip($sites_used) ); echo '<hr><hr><hr>';
-echo makefooter($item_id, array_flip($sites_used));
-//print_r($result);
+$sites_used = array_flip(array_map($mapToSiteType, array_keys($item_data["sitelinks"])));
+echo makefooter($item_id, $sites_used);
 
 ?>
  </body>
