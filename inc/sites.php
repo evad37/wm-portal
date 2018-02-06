@@ -13,4 +13,8 @@ $sites = [
 ];
 $site_types = array_flip( $sites );
 
+$mapToSiteType = function($site) use ($site_types) {
+	return $site_types[$site];
+};
+
 ?>
