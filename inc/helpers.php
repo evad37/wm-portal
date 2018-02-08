@@ -42,20 +42,15 @@ function getDeepData($arr, $keys, $default="") {
 	return $data;
 }
 
-/*
-function getSiteType($site_code) {
-	if ( $site_code === 'commonswiki' ) {
-		return 'commons';
-	}
-	if (strpos($site_code, 'wikisource') !== false) {
-		return 'wikisource';
-	}
-	if (strpos($site_code, 'wikivoyage') !== false) {
-		return 'wikivoyage';
-	}
-	return 'wikipedia';
+function addReasonator($sitelinks, $item_id, $lang_code) {
+	return array_merge($sitelinks, [
+			"reasonator" => [
+				"url" => "https://tools.wmflabs.org/reasonator/?q={$item_id}&lang={$lang_code}",
+				"title" => "Data"
+			]
+		]
+	);
 }
-*/
 
 function extractPageTitle($page) {
 	return $page["title"];
@@ -73,10 +68,8 @@ function parseImgCredits() {
 	$licences = $credits["licences"];
 	$images = $credits["images"];
 	
-	$parseRow = function ($name, $image_data) use ($licences) {
-		
+	$parseRow = function ($name, $image_data) use ($licences) {	
 		$licence = $licences[ $image_data["license"] ];
-	
 		return [
 			"name" => $name,
 			"title" => $image_data["title"],
