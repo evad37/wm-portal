@@ -52,6 +52,14 @@ function addReasonator($sitelinks, $item_id, $lang_code) {
 	);
 }
 
+function sortByKey($sitelinks, $key_order) {
+	$orderOfKeys = array_flip($key_order);
+	uksort($sitelinks, function($key1, $key2) use ($orderOfKeys) {
+		return ( getDeepData($orderOfKeys, [$key1], 0) - getDeepData($orderOfKeys, [$key2], 0) );
+	});
+	return $sitelinks;
+}
+
 function extractPageTitle($page) {
 	return $page["title"];
 }
@@ -66,7 +74,11 @@ function joinWithPipes($v1, $v2) {
 function parseImgCredits() {
 	$credits = json_decode(file_get_contents("img/CREDITS.json"), true);
 	$licences = $credits["licences"];
-	$images = $credits["images"];
+	if ( isset($GLOBALS['sites']) ) {
+		$images = sortByKey($credits["images"], array_keys($GLOBALS['sites']));
+	} else {
+		$images = $credits["images"];
+	}
 	
 	$parseRow = function ($name, $image_data) use ($licences) {	
 		$licence = $licences[ $image_data["license"] ];
