@@ -9,7 +9,8 @@ $sites = [
 	"wikispecies" => "specieswiki",
 	"wikiversity" => "{$lang_code}wikiversity",
 	"wikivoyage" => "{$lang_code}wikivoyage",
-	"wiktionary" => "{$lang_code}wiktionary"
+	"wiktionary" => "{$lang_code}wiktionary",
+	"reasonator" => "reasonator"
 ];
 $site_types = array_flip( $sites );
 
