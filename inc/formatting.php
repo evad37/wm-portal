@@ -57,17 +57,25 @@ function makeBoxlink ($url, $logo, $title, $subtitle) {
 	</div>";
 }
 
+function makeFormattedImageCredits($imgs_used = []) {
+	$makeCreditLine = function ($imgData) {
+		return "<li><a href={$imgData['source']}>{$imgData['title']}</a> by {$imgData['authors']}: <a href={$imgData['licenceurl']}>{$imgData['licence']}</a></li>";
+	};
+	
+	return implode( array_map($makeCreditLine, getRelevantImageCredits($imgs_used)) );
+}
+
 function makefooter ($id = false, $sites_used = []) {
 	$itemlink = ( $id ) ? ": <a href='https://www.wikidata.org/wiki/{$id}'>{$id}</a>" : '';
 	
-	$default_images = ( $id ) ? ['reasonator'=>true] : [];
-	$imgs_used = array_merge($default_images, $sites_used);
+	//$default_images = ( $id ) ? ['reasonator'=>true] : [];
+	//$ = array_merge($default_images, $sites_used);
 	
-	$tm_note = ( count($imgs_used) === 0 ) ? '' : "<br>	
+	$tm_note = ( count($sites_used) === 0 ) ? '' : "<br>	
 		Wikimedia site icons ™ Wikimedia Foundation, Inc. (used here under the
 		<a href='https://wikimediafoundation.org/wiki/Trademark_policy'>Trademark policy</a>,
 		section 3.6)";
-	$imagecredits = makeImgCredits($imgs_used);
+	$imagecredits = ( count($sites_used) === 0 ) ? '' : makeFormattedImageCredits($sites_used);
 	
 	return "<div class='footer small'>
 	The Free Knowledge Portal uses data from <a href='https://www.wikidata.org/'>Wikidata</a>{$itemlink}.
