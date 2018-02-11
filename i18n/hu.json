@@ -1,0 +1,50 @@
+{
+	"related": "Kapcsolódó elemek",
+	"nearby": "Közeli elemek",
+	"nolabel": "nincs címke",
+
+	"commons": {
+		"name": "Wikimédia Commons",
+		"type": "Médiafájlok"
+	},
+	"reasonator": {
+		"name": "Reasonator",
+		"type": "Adatok"
+	},
+	"wikibooks": {
+		"name": "Wikikönyvek",
+		"type": "Könyvek"
+	},
+	"wikinews": {
+		"name": "Wikihírek",
+		"type": "Hírek"
+	},
+	"wikipedia": {
+		"name": "Wikipédia",
+		"type": "Enciklopédiaszócikk"
+	},
+	"wikiquote": {
+		"name": "Wikidézet",
+		"type": "Idézetek"
+	},
+	"wikisource": {
+		"name": "Wikiforrás",
+		"type": "Forrásszövegek"
+	},
+	"wikispecies": {
+		"name": "Wikifajok",
+		"type": "Rendszertani adatok"
+	},
+	"wikiversity": {
+		"name": "Wikiegyetem",
+		"type": "Tananyagok"
+	},	
+	"wikivoyage": {
+		"name": "Wikivoyage",
+		"type": "Útikönyv"
+	},
+	"wiktionary": {
+		"name": "Wikiszótár",
+		"type": "Szótárbejegyzés"
+	}
+}
