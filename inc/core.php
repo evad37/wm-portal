@@ -169,9 +169,9 @@ function getRelevantImageCredits($imgs_used = []) {
 class Api
 {
 	private $tool_info = [
-		"name" => "Knowledge Portal",
-		"version" => "0.0.5-dev",
-		"updated" => "2018-01-29",
+		"name" => "Free Knowledge Portal",
+		"version" => "1.1.0",
+		"updated" => "2018-02-12",
 		"author_name" => "Evad37",
 		"author_contact" => "https://en.wikipedia.org/wiki/User:Evad37"
 	];
@@ -364,7 +364,8 @@ class ApiManager
 		}
 		
 		$identifierClaims = array_filter($result["claims"], 'claimIsForExternalId');
-		return array_map('extractDataValue', $identifierClaims);
+		$identifiersValues = array_map('extractDataValue', $identifierClaims);
+		return array_slice($identifiersValues, 0, 3);
 	}
 	
 	function lookupFormatterUrl($property_id) {
