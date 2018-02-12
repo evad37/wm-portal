@@ -35,6 +35,18 @@ function extractPageTitle($page) {
 	return $page["title"];
 }
 
+function extractDataValue($claim) {
+	return getDeepData($claim, [0, 'mainsnak', 'datavalue', 'value']);
+}
+
+function simplifyIdentiferData($value, $formatterUrl, $propertyData) {
+	return [
+		"name" => $propertyData['label'],
+		"value" => $value,
+		"url" => str_replace('$1', $value, $formatterUrl)
+	];
+}
+
 /* ---------- Array reducing functions ---------------------------------------------------------- */
 
 function joinWithPipes($v1, $v2) {
@@ -42,6 +54,12 @@ function joinWithPipes($v1, $v2) {
 		return $v2;
 	}
 	return "{$v1}|{$v2}";
+}
+
+/* ---------- Array filtering functions --------------------------------------------------------- */
+
+function claimIsForExternalId($claim) {
+	return getDeepData($claim, [0, 'mainsnak', 'datatype']) === "external-id";
 }
 
 /* ---------- Other array functions ------------------------------------------------------------- */
@@ -151,9 +169,9 @@ function getRelevantImageCredits($imgs_used = []) {
 class Api
 {
 	private $tool_info = [
-		"name" => "Knowledge Portal",
-		"version" => "0.0.5-dev",
-		"updated" => "2018-01-29",
+		"name" => "Free Knowledge Portal",
+		"version" => "1.1.0",
+		"updated" => "2018-02-12",
 		"author_name" => "Evad37",
 		"author_contact" => "https://en.wikipedia.org/wiki/User:Evad37"
 	];
@@ -332,6 +350,35 @@ class ApiManager
 		$id = array_keys($result["entities"])[0];
 		return $id;
 	}
+	
+	function lookupExternalIdentifiers($item_id) {
+		$result = $this->api->get([
+			"action" => "wbgetclaims",
+			"format" => "json",
+			"entity" => $item_id,
+			"props" => ""
+		]);
+		
+		if ( !isset($result["claims"]) ) {
+			return [];
+		}
+		
+		$identifierClaims = array_filter($result["claims"], 'claimIsForExternalId');
+		$identifiersValues = array_map('extractDataValue', $identifierClaims);
+		return array_slice($identifiersValues, 0, 3);
+	}
+	
+	function lookupFormatterUrl($property_id) {
+		$result = $this->api->get([
+			"action" => "wbgetclaims",
+			"format" => "json",
+			"entity" => $property_id,
+			"property" => "P1630",
+			"props" => ""
+		]);
+		//var_dump(getDeepData($result, ['claims', 'P1630', '0'])); echo "<hr>";
+		return getDeepData($result, ['claims', 'P1630', '0', 'mainsnak', 'datavalue', 'value']);
+	}
 
 }
 
@@ -361,6 +408,24 @@ $getPortalInfo = function() use ($api, $item_id, $lang_code, $sites, $site_order
 		$lang_code
 	);
 	
+	$identifiers_values = $api->lookupExternalIdentifiers($item_id);
+	$identifiers_formatterUrls = array_map(
+		function($id) use ($api) {
+			return $api->lookupFormatterUrl($id);
+		},
+		array_keys($identifiers_values)
+	);
+	$identifiers_propertyData = $api->lookupMultipleItemsData(
+		array_keys($identifiers_values),
+		$lang_code
+	);
+	$identifiers = array_map(
+		"simplifyIdentiferData",
+		$identifiers_values,
+		$identifiers_formatterUrls,
+		$identifiers_propertyData
+	);	
+	
 	$sites_linked = array_flip(array_map($mapToSiteType, array_keys($sitelinks)));
 	
 	$image_credits = getRelevantImageCredits($sites_linked);
@@ -371,6 +436,7 @@ $getPortalInfo = function() use ($api, $item_id, $lang_code, $sites, $site_order
 		"sitelinks" => $sitelinks,
 		"related_items" => $related_items,
 		"nearby_items" => $nearby_items,
+		"identifiers" => $identifiers,
 		"sites_linked" => $sites_linked,
 		"image_credits" => $image_credits
 	];
