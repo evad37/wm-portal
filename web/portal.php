@@ -54,6 +54,20 @@ if ( count($portal["nearby_items"]) > 0 ) {
 	echo "</div>";
 }
 
+if ( count($portal["identifiers"]) > 0 ) {
+	echo makeSubheading( getDeepData($i18n, ['identifiers'], 'Identifiers') );
+	echo "<div class='flex-grid'>";	
+	foreach ($portal["identifiers"] as $ident) {
+		echo makeBoxlink(
+			$ident["url"],
+			false,
+			$ident['name'],
+			"<div style='word-break:break-all'>{$ident['value']}</div>"
+		);
+	}
+	echo "</div>";
+}
+
 echo makefooter($item_id, $portal["sites_linked"]);
 
 ?>
