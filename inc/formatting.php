@@ -2,6 +2,7 @@
 
 function echo_html_top($title = false) {
 	$pagetitle = ( $title ) ? "Free Knowledge Portal: {$title}" : "Free Knowledge Portal";
+	$jquerySrc = ( htmlspecialchars($_SERVER['HTTP_HOST']) == 'localhost' ) ? "http://code.jquery.com/jquery-3.3.1.min.js" : "https://tools-static.wmflabs.org/cdnjs/ajax/libs/jquery/3.3.1/jquery.min.js";
 	echo "<html>
 	<head>
 	<title>{$pagetitle}</title>
@@ -10,6 +11,8 @@ function echo_html_top($title = false) {
 	<style>";
 	include 'css/styles.css';
 	echo "</style>
+	<script type='text/javascript' src='{$jquerySrc}' defer></script>
+	<script type='text/javascript' src='js/loadmore.js' defer></script>
 	</head>
 	<body>";
 }
@@ -55,6 +58,13 @@ function makeBoxlink ($url, $logo, $title, $subtitle) {
 			</a>
 		</div>
 	</div>";
+}
+
+function makeLoadMoreLink () {
+	return 	"<div class='flex-cell'>
+			<div class='loadmore' style='display:none;'>&nbsp;.&nbsp;.&nbsp;.&nbsp;</div>
+			<div class=loading style='display:none;'><img src=img/ajax-loader.gif></div>
+		</div>";
 }
 
 function makeFormattedImageCredits($imgs_used = []) {

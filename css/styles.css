@@ -118,6 +118,25 @@ a.flex-content:hover, a.flex-content:active {
 code {
 	font-family: monospace;
 }
+.loadmore {
+    margin: auto;
+    background: #36c;
+    color: #fff;
+    padding: 0.5em;
+    border-radius: 0.6em;
+	cursor: pointer;
+	line-height:2em;
+	font-weight:bold;
+}
+.loading {
+    margin: auto;
+    background: #fff /*#72777d*/;
+    padding: 0.5em;
+    border-radius: 0.6em;
+}
+#identifiers .desc {
+	word-break: break-all;
+}
 
 /* Language selection, Edit on wikidata */
 .main-extra {

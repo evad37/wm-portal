@@ -14,7 +14,7 @@ echo makeHeading(
 );
 echo makeSubheading($portal["item_desc"]);
 
-echo "<div class='flex-grid'>";
+echo "<div class='flex-grid' id='sitelinks'>";
 foreach ($portal["sitelinks"] as $site => $site_info) {
 	$sitetype = $site_types[$site];
 	echo makeBoxlink(
@@ -26,9 +26,11 @@ foreach ($portal["sitelinks"] as $site => $site_info) {
 }
 echo "</div>";
 
-if ( count($portal["related_items"]) > 0 ) {
+if ( true /*count($portal["related_items"]) > 0*/ ) {
 	echo makeSubheading( getDeepData($i18n, ['related'], 'Related') );	
-	echo "<div class='flex-grid'>";
+	echo "<div class='flex-grid' id='related'>";
+	echo makeLoadMoreLink();
+	/*
 	foreach ($portal["related_items"] as $r) {
 		echo makeBoxlink(
 			"{$self}/{$r['item']}/{$lang_code}",
@@ -37,12 +39,16 @@ if ( count($portal["related_items"]) > 0 ) {
 			$r['description']
 		);
 	}
+	*/
+		//echo makeBoxlink("", false, "more", "");
 	echo "</div>";
 }
 
-if ( count($portal["nearby_items"]) > 0 ) {
+if ( true /*count($portal["nearby_items"]) > 0 */) {
 	echo makeSubheading( getDeepData($i18n, ['nearby'], 'Nearby') );
-	echo "<div class='flex-grid'>";	
+	echo "<div class='flex-grid' id='nearby'>";
+	echo makeLoadMoreLink();
+	/*
 	foreach ($portal["nearby_items"] as $n) {
 		echo makeBoxlink(
 			"{$self}/{$n['item']}/{$lang_code}",
@@ -51,12 +57,15 @@ if ( count($portal["nearby_items"]) > 0 ) {
 			$n['description']
 		);
 	}
+	*/
 	echo "</div>";
 }
 
-if ( count($portal["identifiers"]) > 0 ) {
+if ( true /*count($portal["identifiers"]) > 0*/ ) {
 	echo makeSubheading( getDeepData($i18n, ['identifiers'], 'Identifiers') );
-	echo "<div class='flex-grid'>";	
+	echo "<div class='flex-grid' id='identifiers'>";
+	echo makeLoadMoreLink();
+	/*
 	foreach ($portal["identifiers"] as $ident) {
 		echo makeBoxlink(
 			$ident["url"],
@@ -65,6 +74,7 @@ if ( count($portal["identifiers"]) > 0 ) {
 			"<div style='word-break:break-all'>{$ident['value']}</div>"
 		);
 	}
+	*/
 	echo "</div>";
 }
 

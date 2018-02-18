@@ -398,7 +398,7 @@ $getPortalInfo = function() use ($api, $item_id, $lang_code, $sites, $site_order
 			$lang_code
 		),
 		$site_order
-	);
+	);/*
 	$related_items = $api->lookupMultipleItemsData(
 		$api->lookupRelatedItemIds($item_id),
 		$lang_code
@@ -425,6 +425,7 @@ $getPortalInfo = function() use ($api, $item_id, $lang_code, $sites, $site_order
 		$identifiers_formatterUrls,
 		$identifiers_propertyData
 	);	
+	*/
 	
 	$sites_linked = array_flip(array_map($mapToSiteType, array_keys($sitelinks)));
 	
@@ -434,9 +435,11 @@ $getPortalInfo = function() use ($api, $item_id, $lang_code, $sites, $site_order
 		"item_label" => $item_label,
 		"item_desc" => $item_desc,
 		"sitelinks" => $sitelinks,
+		/*
 		"related_items" => $related_items,
 		"nearby_items" => $nearby_items,
 		"identifiers" => $identifiers,
+		*/
 		"sites_linked" => $sites_linked,
 		"image_credits" => $image_credits
 	];
