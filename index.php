@@ -40,6 +40,10 @@ if ( !isset($available_langs[$lang_code]) ) {
 	$i18n = json_decode(file_get_contents("i18n/{$lang_code}.json"), true);
 }
 
-require "web/portal.php";
+if ($show_more) {
+   require "web/more.php";
+} else {
+	require "web/portal.php";
+}
 
 ?>

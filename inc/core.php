@@ -8,6 +8,7 @@ $item_id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_STRING);
 $lang_code = getBaseLanguage(filter_input(INPUT_GET, 'lang', FILTER_SANITIZE_STRING) ?: getDefaultLanguage());
 $page_title = filter_input(INPUT_GET, 'title', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 $page_site = filter_input(INPUT_GET, 'site', FILTER_SANITIZE_STRING);
+$show_more = filter_input(INPUT_GET, 'more', FILTER_SANITIZE_STRING) ?: false;
 
 $sites = [
 	"wikipedia" => "{$lang_code}wiki",
@@ -204,7 +205,7 @@ class Api
 		
 		$result = ( isset($fatal_error) ) ? $fatal_error : json_decode($response, true);
 		
-		if ( /*!isset($result['success']) ||*/ isset($result['error']) ) {
+		if ( isset($result['error']) ) {
 			$error_code = getDeepData($result, ['error', 'code'], false);
 			$error_info = getDeepData($result, ['error', 'info'], 'An unknown error occurred.');
 			echo ( $error_code ) ? "Api error {$error_code}: {$error_info}" : "Api error: {$error_info}";
@@ -248,7 +249,7 @@ class ApiManager
 			"lhprop" => "title",
 			"lhnamespace" => "0",
 			"lhshow" => "!redirect",
-			"lhlimit" => "3"
+			"lhlimit" => "8"
 		]);
 		$pageid = array_keys($result["query"]["pages"])[0];
 		$linkshere = getDeepData($result, ["query", "pages", $pageid, "linkshere"], []);
@@ -285,7 +286,7 @@ class ApiManager
 			"gscoord" => joinWithPipes($coords['lat'], $coords['lon']),
 			"gsradius" => "5000",
 			"gsglobe" => $coords['globe'],
-			"gslimit" => "10",
+			"gslimit" => "20",
 			"gsnamespace" => "0",
 			"gsprimary" => "primary"
 		]);
@@ -300,7 +301,7 @@ class ApiManager
 		}
 		
 		$nearby = array_filter($geosearch, 'notTooClose');
-		$nearby_shortlist =  array_slice($nearby, 0, 3);
+		$nearby_shortlist =  array_slice($nearby, 0, 8);
 		$nearby_ids = array_map("extractPageTitle", $nearby_shortlist);
 
 		return $nearby_ids;
@@ -365,7 +366,7 @@ class ApiManager
 		
 		$identifierClaims = array_filter($result["claims"], 'claimIsForExternalId');
 		$identifiersValues = array_map('extractDataValue', $identifierClaims);
-		return array_slice($identifiersValues, 0, 3);
+		return array_slice($identifiersValues, 0, 8);
 	}
 	
 	function lookupFormatterUrl($property_id) {
@@ -376,7 +377,6 @@ class ApiManager
 			"property" => "P1630",
 			"props" => ""
 		]);
-		//var_dump(getDeepData($result, ['claims', 'P1630', '0'])); echo "<hr>";
 		return getDeepData($result, ['claims', 'P1630', '0', 'mainsnak', 'datavalue', 'value']);
 	}
 
@@ -398,15 +398,68 @@ $getPortalInfo = function() use ($api, $item_id, $lang_code, $sites, $site_order
 			$lang_code
 		),
 		$site_order
-	);/*
+	);
+	$item_coords = $api->lookupCoords($item_id);
+	$sites_linked = array_flip(array_map($mapToSiteType, array_keys($sitelinks)));
+	$image_credits = getRelevantImageCredits($sites_linked);
+	
+	return [
+		"item_label" => $item_label,
+		"item_desc" => $item_desc,
+		"sitelinks" => $sitelinks,
+		"item_coords" => $item_coords,
+		"sites_linked" => $sites_linked,
+		"image_credits" => $image_credits
+	];
+	
+};
+
+$getRelatedInfo = function() use ($api, $item_id, $lang_code, $sites) {
+	$i18n = $GLOBALS['i18n'];
+	
+	$item_data  = $api->lookupItemData($item_id, $lang_code, $sites);
+	$item_label = getDeepData($item_data, ["labels", $lang_code, "value"], "({$item_id}: {$i18n['nolabel']})");
+	$item_desc  = getDeepData($item_data, ["descriptions", $lang_code, "value"]);
+	
 	$related_items = $api->lookupMultipleItemsData(
 		$api->lookupRelatedItemIds($item_id),
 		$lang_code
 	);
+	
+	return [
+		"item_label" => $item_label,
+		"item_desc" => $item_desc,
+		"related_items" => $related_items
+	];
+	
+};
+
+$getNearbyInfo = function() use ($api, $item_id, $lang_code, $sites) {
+	$i18n = $GLOBALS['i18n'];
+	
+	$item_data  = $api->lookupItemData($item_id, $lang_code, $sites);
+	$item_label = getDeepData($item_data, ["labels", $lang_code, "value"], "({$item_id}: {$i18n['nolabel']})");
+	$item_desc  = getDeepData($item_data, ["descriptions", $lang_code, "value"]);
+	
 	$nearby_items  = $api->lookupMultipleItemsData(
 		$api->lookupNearbyItemIds( $api->lookupCoords($item_id) ),
 		$lang_code
 	);
+	
+	return [
+		"item_label" => $item_label,
+		"item_desc" => $item_desc,
+		"nearby_items" => $nearby_items
+	];
+	
+};
+
+$getIdentifiersInfo = function() use ($api, $item_id, $lang_code, $sites) {
+	$i18n = $GLOBALS['i18n'];
+	
+	$item_data  = $api->lookupItemData($item_id, $lang_code, $sites);
+	$item_label = getDeepData($item_data, ["labels", $lang_code, "value"], "({$item_id}: {$i18n['nolabel']})");
+	$item_desc  = getDeepData($item_data, ["descriptions", $lang_code, "value"]);
 	
 	$identifiers_values = $api->lookupExternalIdentifiers($item_id);
 	$identifiers_formatterUrls = array_map(
@@ -424,29 +477,13 @@ $getPortalInfo = function() use ($api, $item_id, $lang_code, $sites, $site_order
 		$identifiers_values,
 		$identifiers_formatterUrls,
 		$identifiers_propertyData
-	);	
-	*/
-	
-	$sites_linked = array_flip(array_map($mapToSiteType, array_keys($sitelinks)));
-	
-	$image_credits = getRelevantImageCredits($sites_linked);
+	);
 	
 	return [
 		"item_label" => $item_label,
 		"item_desc" => $item_desc,
-		"sitelinks" => $sitelinks,
-		/*
-		"related_items" => $related_items,
-		"nearby_items" => $nearby_items,
-		"identifiers" => $identifiers,
-		*/
-		"sites_linked" => $sites_linked,
-		"image_credits" => $image_credits
+		"identifiers" => $identifiers
 	];
 	
 };
-
-
-
-
 ?>

@@ -118,6 +118,7 @@ a.flex-content:hover, a.flex-content:active {
 code {
 	font-family: monospace;
 }
+
 .loadmore {
     margin: auto;
     background: #36c;
@@ -130,12 +131,28 @@ code {
 }
 .loading {
     margin: auto;
-    background: #fff /*#72777d*/;
+    background: #fff;
     padding: 0.5em;
     border-radius: 0.6em;
 }
 #identifiers .desc {
 	word-break: break-all;
+}
+.loadmore-no-js {
+	margin: auto;
+	background: transparent;
+	border: 0;
+    padding: 0.5em;
+	line-height:2em;
+    border-radius: 0.6em;
+}
+.loadmore-no-js form {
+	margin: 0;
+}
+.loadmore-no-js form input {
+	height: 2.5em;
+	width: 100%;
+	font-size: 150%
 }
 
 /* Language selection, Edit on wikidata */

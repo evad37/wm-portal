@@ -1,8 +1,7 @@
  <?php
 
-function echo_html_top($title = false) {
+function echo_html_top($title = false, $extra='') {
 	$pagetitle = ( $title ) ? "Free Knowledge Portal: {$title}" : "Free Knowledge Portal";
-	$jquerySrc = ( htmlspecialchars($_SERVER['HTTP_HOST']) == 'localhost' ) ? "http://code.jquery.com/jquery-3.3.1.min.js" : "https://tools-static.wmflabs.org/cdnjs/ajax/libs/jquery/3.3.1/jquery.min.js";
 	echo "<html>
 	<head>
 	<title>{$pagetitle}</title>
@@ -11,8 +10,7 @@ function echo_html_top($title = false) {
 	<style>";
 	include 'css/styles.css';
 	echo "</style>
-	<script type='text/javascript' src='{$jquerySrc}' defer></script>
-	<script type='text/javascript' src='js/loadmore.js' defer></script>
+	{$extra}
 	</head>
 	<body>";
 }
@@ -44,8 +42,9 @@ function makeLangSelector ($item_id, $imgsrc, $lang_code, $available_langs) {
 function makeHeading ($label) {
 	return "<div class='main-label'>{$label}</div>";
 }
-function makeSubheading ($description) {
-	return "<div class='main-desc'>{$description}</div>";
+function makeSubheading ($description, $divId=false) {
+	$idAttribute = ( $divId ) ? " id='{$divId}'" : "";
+	return "<div class='main-desc'{$idAttribute}>{$description}</div>";
 }
 function makeBoxlink ($url, $logo, $title, $subtitle) {
 	$img = ( $logo ) ? "<img class='logo' src='{$logo}' alt='{$subtitle}'>" : '';
@@ -60,10 +59,23 @@ function makeBoxlink ($url, $logo, $title, $subtitle) {
 	</div>";
 }
 
-function makeLoadMoreLink () {
+function makeLoadMoreLink ($section) {
+	$indexphp = $GLOBALS['self'] . "/index.php";
+	$noJsForm =	"<noscript class='flex-content-wrapper'>
+		<div class='flex-content loadmore-no-js'>
+			<form id='{$section}-no-js' action='{$indexphp}' method='get'>
+				<input type='hidden' name='id' value='{$GLOBALS['item_id']}' />
+				<input type='hidden' name='lang' value='{$GLOBALS['lang_code']}' />
+				<input type='hidden' name='more' value='{$section}' />
+				<input type='submit' value='>>'>
+			</form>
+		</div>
+	</noscript>";
+	
 	return 	"<div class='flex-cell'>
 			<div class='loadmore' style='display:none;'>&nbsp;.&nbsp;.&nbsp;.&nbsp;</div>
-			<div class=loading style='display:none;'><img src=img/ajax-loader.gif></div>
+			<div class='loading' style='display:none;'><img src=img/ajax-loader.gif></div>
+			{$noJsForm}
 		</div>";
 }
 
