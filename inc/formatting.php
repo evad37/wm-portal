@@ -44,7 +44,8 @@ function makeHeading ($label) {
 }
 function makeSubheading ($description, $divId=false) {
 	$idAttribute = ( $divId ) ? " id='{$divId}'" : "";
-	return "<div class='main-desc'{$idAttribute}>{$description}</div>";
+	$text = $description ?: '&nbsp;';
+	return "<div class='main-desc'{$idAttribute}>{$text}</div>";
 }
 function makeBoxlink ($url, $logo, $title, $subtitle) {
 	$img = ( $logo ) ? "<img class='logo' src='{$logo}' alt='{$subtitle}'>" : '';
@@ -74,7 +75,7 @@ function makeLoadMoreLink ($section) {
 	
 	return 	"<div class='flex-cell'>
 			<div class='loadmore' style='display:none;'>&nbsp;.&nbsp;.&nbsp;.&nbsp;</div>
-			<div class='loading' style='display:none;'><img src=img/ajax-loader.gif></div>
+			<div class='loading' style='display:none;'><img src={$GLOBALS['self']}/img/ajax-loader.gif></div>
 			{$noJsForm}
 		</div>";
 }

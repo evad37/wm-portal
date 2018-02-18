@@ -69,6 +69,9 @@ var lookupRelatedIds = function (id) {
 		return response.query.pages[pageid].linkshere;
 	})
 	.then(function(results) {
+		if ( !results ) {
+			return [];
+		}			
 		return results.map(function(r) { return r.title; });
 	});
 };
@@ -87,9 +90,12 @@ lookupNearbyIds = function (id, minDistanceAway) {
 	return doApiRequest(coordRequest)
 	.then(function(response) {
 		var pageid = Object.keys(response.query.pages)[0];
-		return response.query.pages[pageid].coordinates || $.Deferred().reject('No coords');
+		return response.query.pages[pageid].coordinates || false;
 	})
 	.then(function(coords) {
+		if ( !coords ) {
+			return false;
+		}
 		var nearbyRequest = {
 			"action": "query",
 			"format": "json",
@@ -104,7 +110,7 @@ lookupNearbyIds = function (id, minDistanceAway) {
 		return doApiRequest(nearbyRequest);
 	})
 	.then(function(response) {
-		return response.query.geosearch;
+		return getNestedData(response, ['query', 'geosearch'], []);
 	})
 	.then(function(results) {
 		return results.filter(function(r) { return r.dist >= minDistanceAway; });
@@ -261,7 +267,9 @@ var external_identifiers = lookupIdentifierClaims(item_id);
 var amountToInitiallyLoad = 3;
 
 var initialiseLoadmoreAndLoading = function (section, dataLength, initialLoadAmount) {
-	if ( dataLength > 0 ) {
+	if ( dataLength === 0 ) {
+		$('#'+section+'-heading, #'+section).remove();
+	} else {
 		showLoaderAndHideMore('#'+section);
 	}
 	if ( dataLength <= initialLoadAmount ) {
