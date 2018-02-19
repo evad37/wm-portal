@@ -76,7 +76,7 @@ function makeLoadMoreLink ($section) {
 	
 	return 	"<div class='flex-cell'>
 			<div class='loadmore' style='display:none;'>&nbsp;.&nbsp;.&nbsp;.&nbsp;</div>
-			<div class='loading' style='display:none;'><img src={$GLOBALS['self']}/img/ajax-loader.gif></div>
+			<div class='loading' style='display:none;'><img src={$GLOBALS['self']}/img/Ajax-loader.gif></div>
 			{$noJsForm}
 		</div>";
 }
