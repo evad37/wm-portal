@@ -3,7 +3,6 @@ require "inc/external/getDefaultLanguage.php";
 require "inc/formatting.php";
 require "inc/core.php";
 
-
 // When there's no valid item id, nor a page title & site, show the about page instead
 $has_title_and_site = !!$page_title && !! $page_site;
 if ( !preg_match("/^Q\d+$/", $item_id) && !$has_title_and_site ) {
@@ -41,6 +40,10 @@ if ( !isset($available_langs[$lang_code]) ) {
 	$i18n = json_decode(file_get_contents("i18n/{$lang_code}.json"), true);
 }
 
-require "web/portal.php";
+if ($show_more) {
+   require "web/more.php";
+} else {
+	require "web/portal.php";
+}
 
 ?>

@@ -22,6 +22,14 @@
 	},
 
 	"images": {
+		"ajax-spinner": {
+			"title": "Ajax spinner",
+			"file": "ajax-spinner.gif",
+			"source": "https://commons.wikimedia.org/wiki/File:Ajax-loader.gif",
+			"authors": "Ajaxload",
+			"license": "PD"
+		},
+	
 		"reasonator": {
 			"title": "Reasonator icon",
 			"file": "reasonator.png",

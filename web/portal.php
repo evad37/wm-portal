@@ -2,7 +2,10 @@
 
 $portal = $getPortalInfo();
 
-echo_html_top($portal["item_label"]);
+$jquerySrc = ( htmlspecialchars($_SERVER['HTTP_HOST']) == 'localhost' ) ? "http://code.jquery.com/jquery-3.3.1.min.js" : "https://tools-static.wmflabs.org/cdnjs/ajax/libs/jquery/3.3.1/jquery.min.js";
+$scripts = "<script type='text/javascript' src='{$jquerySrc}' defer></script>
+	<script type='text/javascript' src='{$self}/js/loadmore.js' defer></script>";
+echo_html_top($portal["item_label"], $scripts);
 
 echo makeHeading(
 	$portal["item_label"] . makeLangSelector(
@@ -14,7 +17,7 @@ echo makeHeading(
 );
 echo makeSubheading($portal["item_desc"]);
 
-echo "<div class='flex-grid'>";
+echo "<div class='flex-grid' id='sitelinks'>";
 foreach ($portal["sitelinks"] as $site => $site_info) {
 	$sitetype = $site_types[$site];
 	echo makeBoxlink(
@@ -26,48 +29,25 @@ foreach ($portal["sitelinks"] as $site => $site_info) {
 }
 echo "</div>";
 
-if ( count($portal["related_items"]) > 0 ) {
-	echo makeSubheading( getDeepData($i18n, ['related'], 'Related') );	
-	echo "<div class='flex-grid'>";
-	foreach ($portal["related_items"] as $r) {
-		echo makeBoxlink(
-			"{$self}/{$r['item']}/{$lang_code}",
-			false,
-			$r['label'],
-			$r['description']
-		);
-	}
+
+if ( $portal["has_related_items"] ) {
+	echo makeSubheading( getDeepData($i18n, ['related'], 'Related'), 'related-heading' );	
+	echo "<div class='flex-grid' id='related'>";
+	echo makeLoadMoreLink('related');
 	echo "</div>";
 }
-
-if ( count($portal["nearby_items"]) > 0 ) {
-	echo makeSubheading( getDeepData($i18n, ['nearby'], 'Nearby') );
-	echo "<div class='flex-grid'>";	
-	foreach ($portal["nearby_items"] as $n) {
-		echo makeBoxlink(
-			"{$self}/{$n['item']}/{$lang_code}",
-			false,
-			$n['label'],
-			$n['description']
-		);
-	}
+if ( $portal["has_coords"] ) {
+	echo makeSubheading( getDeepData($i18n, ['nearby'], 'Nearby'), 'nearby-heading' );
+	echo "<div class='flex-grid' id='nearby'>";
+	echo makeLoadMoreLink('nearby');
 	echo "</div>";
 }
-
-if ( count($portal["identifiers"]) > 0 ) {
-	echo makeSubheading( getDeepData($i18n, ['identifiers'], 'Identifiers') );
-	echo "<div class='flex-grid'>";	
-	foreach ($portal["identifiers"] as $ident) {
-		echo makeBoxlink(
-			$ident["url"],
-			false,
-			$ident['name'],
-			"<div style='word-break:break-all'>{$ident['value']}</div>"
-		);
-	}
+if ( $portal["has_identifiers"] ) {
+	echo makeSubheading( getDeepData($i18n, ['identifiers'], 'Identifiers'), 'identifiers-heading' );
+	echo "<div class='flex-grid' id='identifiers'>";
+	echo makeLoadMoreLink('identifiers');
 	echo "</div>";
 }
-
 echo makefooter($item_id, $portal["sites_linked"]);
 
 ?>

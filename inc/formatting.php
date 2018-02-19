@@ -1,6 +1,6 @@
  <?php
 
-function echo_html_top($title = false) {
+function echo_html_top($title = false, $extra='') {
 	$pagetitle = ( $title ) ? "Free Knowledge Portal: {$title}" : "Free Knowledge Portal";
 	echo "<html>
 	<head>
@@ -10,6 +10,7 @@ function echo_html_top($title = false) {
 	<style>";
 	include 'css/styles.css';
 	echo "</style>
+	{$extra}
 	</head>
 	<body>";
 }
@@ -41,8 +42,10 @@ function makeLangSelector ($item_id, $imgsrc, $lang_code, $available_langs) {
 function makeHeading ($label) {
 	return "<div class='main-label'>{$label}</div>";
 }
-function makeSubheading ($description) {
-	return "<div class='main-desc'>{$description}</div>";
+function makeSubheading ($description, $divId=false) {
+	$idAttribute = ( $divId ) ? " id='{$divId}'" : "";
+	$text = $description ?: '&nbsp;';
+	return "<div class='main-desc'{$idAttribute}>{$text}</div>";
 }
 function makeBoxlink ($url, $logo, $title, $subtitle) {
 	$img = ( $logo ) ? "<img class='logo' src='{$logo}' alt='{$subtitle}'>" : '';
@@ -57,6 +60,27 @@ function makeBoxlink ($url, $logo, $title, $subtitle) {
 	</div>";
 }
 
+function makeLoadMoreLink ($section) {
+	$indexphp = $GLOBALS['self'] . "/index.php";
+	$label = getDeepData($GLOBALS['i18n'], [$section], $section);
+	$noJsForm =	"<noscript class='flex-content-wrapper'>
+		<div class='flex-content loadmore-no-js'>
+			<form id='{$section}-no-js' action='{$indexphp}' method='get'>
+				<input type='hidden' name='id' value='{$GLOBALS['item_id']}' />
+				<input type='hidden' name='lang' value='{$GLOBALS['lang_code']}' />
+				<input type='hidden' name='more' value='{$section}' />
+				<input type='submit' value='{$label}'>
+			</form>
+		</div>
+	</noscript>";
+	
+	return 	"<div class='flex-cell'>
+			<div class='loadmore' style='display:none;'>&nbsp;.&nbsp;.&nbsp;.&nbsp;</div>
+			<div class='loading' style='display:none;'><img src={$GLOBALS['self']}/img/ajax-loader.gif></div>
+			{$noJsForm}
+		</div>";
+}
+
 function makeFormattedImageCredits($imgs_used = []) {
 	$makeCreditLine = function ($imgData) {
 		return "<li><a href={$imgData['source']}>{$imgData['title']}</a> by {$imgData['authors']}: <a href={$imgData['licenceurl']}>{$imgData['licence']}</a></li>";
@@ -67,9 +91,6 @@ function makeFormattedImageCredits($imgs_used = []) {
 
 function makefooter ($id = false, $sites_used = []) {
 	$itemlink = ( $id ) ? ": <a href='https://www.wikidata.org/wiki/{$id}'>{$id}</a>" : '';
-	
-	//$default_images = ( $id ) ? ['reasonator'=>true] : [];
-	//$ = array_merge($default_images, $sites_used);
 	
 	$tm_note = ( count($sites_used) === 0 ) ? '' : "<br>	
 		Wikimedia site icons ™ Wikimedia Foundation, Inc. (used here under the

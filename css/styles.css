@@ -36,6 +36,7 @@ body {
 	display: flex;
 	flex-wrap: wrap;
 	padding: 5px;
+	clear: both;
 }
 .flex-cell {
     display: flex;
@@ -117,6 +118,48 @@ a.flex-content:hover, a.flex-content:active {
 }
 code {
 	font-family: monospace;
+}
+
+/* Related, nearby, identifiers sections */
+
+#related-heading, #nearby-heading, #identifiers-heading {
+	/* Hidden when page loads, shown by javascript when appropriate */
+	display: none;
+}
+.loadmore {
+    margin: auto;
+    background: #36c;
+    color: #fff;
+    padding: 0.5em;
+    border-radius: 0.6em;
+	cursor: pointer;
+	line-height:2em;
+	font-weight:bold;
+}
+.loading {
+    margin: auto;
+    background: #fff;
+    padding: 0.5em;
+    border-radius: 0.6em;
+}
+#identifiers .desc {
+	word-break: break-all;
+}
+.loadmore-no-js {
+	margin: auto;
+	background: transparent;
+	border: 0;
+    padding: 0;
+	line-height:2em;
+    border-radius: 0.6em;
+}
+.loadmore-no-js form {
+	margin: 0;
+}
+.loadmore-no-js form input {
+	height: 2.5em;
+	width: 100%;
+	font-size: 110%
 }
 
 /* Language selection, Edit on wikidata */
