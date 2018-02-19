@@ -29,23 +29,25 @@ foreach ($portal["sitelinks"] as $site => $site_info) {
 }
 echo "</div>";
 
-echo makeSubheading( getDeepData($i18n, ['related'], 'Related'), 'related-heading' );	
-echo "<div class='flex-grid' id='related'>";
-echo makeLoadMoreLink('related');
-echo "</div>";
 
-if ( $portal["item_coords"] ) {
+if ( $portal["has_related_items"] ) {
+	echo makeSubheading( getDeepData($i18n, ['related'], 'Related'), 'related-heading' );	
+	echo "<div class='flex-grid' id='related'>";
+	echo makeLoadMoreLink('related');
+	echo "</div>";
+}
+if ( $portal["has_coords"] ) {
 	echo makeSubheading( getDeepData($i18n, ['nearby'], 'Nearby'), 'nearby-heading' );
 	echo "<div class='flex-grid' id='nearby'>";
 	echo makeLoadMoreLink('nearby');
 	echo "</div>";
 }
-
-echo makeSubheading( getDeepData($i18n, ['identifiers'], 'Identifiers'), 'identifiers-heading' );
-echo "<div class='flex-grid' id='identifiers'>";
-echo makeLoadMoreLink('identifiers');
-echo "</div>";
-
+if ( $portal["has_identifiers"] ) {
+	echo makeSubheading( getDeepData($i18n, ['identifiers'], 'Identifiers'), 'identifiers-heading' );
+	echo "<div class='flex-grid' id='identifiers'>";
+	echo makeLoadMoreLink('identifiers');
+	echo "</div>";
+}
 echo makefooter($item_id, $portal["sites_linked"]);
 
 ?>

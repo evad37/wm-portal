@@ -17,7 +17,11 @@ echo_html_top($portal["item_label"] . ': ' . getDeepData($i18n, [$show_more], $s
 echo makeHeading(
 	getDeepData($i18n, [$show_more], $show_more)
 );
-echo makeSubheading("<strong>" . $portal["item_label"] . ':</strong> ' . $portal["item_desc"]);
+
+$itemLabelAndDescription = "<strong>{$portal['item_label']}</strong>" .
+ (( $portal["item_desc"] ) ? ": {$portal["item_desc"]}" : '');
+echo makeSubheading($itemLabelAndDescription);
+
 echo "<div class='flex-grid' id='{$show_more}'>";
 
 switch ($show_more) {

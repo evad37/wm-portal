@@ -240,7 +240,7 @@ class ApiManager
 		return $result["entities"][$item_id];
 	}
 
-	function lookupRelatedItemIds ($item_id) {
+	function lookupRelatedItemIds ($item_id, $limit=8) {
 		$result = $this->api->get([
 			"action" => "query",
 			"format" => "json",
@@ -249,7 +249,7 @@ class ApiManager
 			"lhprop" => "title",
 			"lhnamespace" => "0",
 			"lhshow" => "!redirect",
-			"lhlimit" => "8"
+			"lhlimit" => $limit
 		]);
 		$pageid = array_keys($result["query"]["pages"])[0];
 		$linkshere = getDeepData($result, ["query", "pages", $pageid, "linkshere"], []);
@@ -352,7 +352,7 @@ class ApiManager
 		return $id;
 	}
 	
-	function lookupExternalIdentifiers($item_id) {
+	function lookupExternalIdentifiers($item_id, $limit=8) {
 		$result = $this->api->get([
 			"action" => "wbgetclaims",
 			"format" => "json",
@@ -366,7 +366,7 @@ class ApiManager
 		
 		$identifierClaims = array_filter($result["claims"], 'claimIsForExternalId');
 		$identifiersValues = array_map('extractDataValue', $identifierClaims);
-		return array_slice($identifiersValues, 0, 8);
+		return array_slice($identifiersValues, 0, $limit);
 	}
 	
 	function lookupFormatterUrl($property_id) {
@@ -399,7 +399,9 @@ $getPortalInfo = function() use ($api, $item_id, $lang_code, $sites, $site_order
 		),
 		$site_order
 	);
-	$item_coords = $api->lookupCoords($item_id);
+	$has_coords = !!($api->lookupCoords($item_id));
+	$has_related_items = count($api->lookupRelatedItemIds($item_id, 1)) > 0;
+	$has_identifiers = count($api->lookupExternalIdentifiers($item_id, 1)) > 0;
 	$sites_linked = array_flip(array_map($mapToSiteType, array_keys($sitelinks)));
 	$image_credits = getRelevantImageCredits($sites_linked);
 	
@@ -407,7 +409,9 @@ $getPortalInfo = function() use ($api, $item_id, $lang_code, $sites, $site_order
 		"item_label" => $item_label,
 		"item_desc" => $item_desc,
 		"sitelinks" => $sitelinks,
-		"item_coords" => $item_coords,
+		"has_coords" => $has_coords,
+		"has_related_items" => $has_related_items,
+		"has_identifiers" => $has_identifiers,
 		"sites_linked" => $sites_linked,
 		"image_credits" => $image_credits
 	];

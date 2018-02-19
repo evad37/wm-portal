@@ -62,13 +62,14 @@ function makeBoxlink ($url, $logo, $title, $subtitle) {
 
 function makeLoadMoreLink ($section) {
 	$indexphp = $GLOBALS['self'] . "/index.php";
+	$label = getDeepData($GLOBALS['i18n'], [$section], $section);
 	$noJsForm =	"<noscript class='flex-content-wrapper'>
 		<div class='flex-content loadmore-no-js'>
 			<form id='{$section}-no-js' action='{$indexphp}' method='get'>
 				<input type='hidden' name='id' value='{$GLOBALS['item_id']}' />
 				<input type='hidden' name='lang' value='{$GLOBALS['lang_code']}' />
 				<input type='hidden' name='more' value='{$section}' />
-				<input type='submit' value='>>'>
+				<input type='submit' value='{$label}'>
 			</form>
 		</div>
 	</noscript>";
@@ -90,9 +91,6 @@ function makeFormattedImageCredits($imgs_used = []) {
 
 function makefooter ($id = false, $sites_used = []) {
 	$itemlink = ( $id ) ? ": <a href='https://www.wikidata.org/wiki/{$id}'>{$id}</a>" : '';
-	
-	//$default_images = ( $id ) ? ['reasonator'=>true] : [];
-	//$ = array_merge($default_images, $sites_used);
 	
 	$tm_note = ( count($sites_used) === 0 ) ? '' : "<br>	
 		Wikimedia site icons ™ Wikimedia Foundation, Inc. (used here under the

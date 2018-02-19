@@ -15,6 +15,7 @@ var getNestedData = function(obj, keys, fallback) {
 };
 /* ========== DOM manipulation etc. ========== */
 var showLoaderAndHideMore = function(elementSelector) {
+	$(elementSelector).show();
 	$(elementSelector).find('.loading').show();
 };
 var showMoreAndHideLoader = function(elementSelector) {
@@ -270,6 +271,7 @@ var initialiseLoadmoreAndLoading = function (section, dataLength, initialLoadAmo
 	if ( dataLength === 0 ) {
 		$('#'+section+'-heading, #'+section).remove();
 	} else {
+		$('#'+section+'-heading, #'+section).show();
 		showLoaderAndHideMore('#'+section);
 	}
 	if ( dataLength <= initialLoadAmount ) {
