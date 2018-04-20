@@ -46,4 +46,7 @@ if ($show_more) {
 	require "web/portal.php";
 }
 
+require_once('inc/db.php');
+updateCounter($item_id);
+
 ?>

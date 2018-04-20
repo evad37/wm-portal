@@ -191,3 +191,45 @@ code {
 		margin-top:0.2em;
 	}
 }
+
+/* Page views chart */
+.bar {
+	fill: #444;
+	height: 21px;
+	transition: fill .3s ease;
+	cursor: pointer;
+	font-family: Helvetica, sans-serif;
+}
+.bar text {
+	color: black;
+}
+.bar text.label {
+	font-size: 94%;
+	font-weight: normal;
+}
+.bar text.value {
+	font-size: 90%;
+}
+.bar text.heading {
+	font-size: 96%;
+	font-weight: bold;
+	text-decoration: underline;
+}
+.bar:hover,
+.bar:focus {
+	fill: #c00000;
+}
+.bar:hover text,
+.bar:focus text {
+	fill: #d00000;
+}
+@media (min-width: 600px) {
+	svg.chart {
+		width: 600px;
+	}
+}
+@media (max-width: 599px) {
+	svg.chart {
+		width: 98vw;
+	}
+}
