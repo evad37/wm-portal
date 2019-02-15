@@ -2,6 +2,10 @@
 
 $portal = $getPortalInfo();
 
+if ( $item_id !== $portal["item_id"] ) {
+	header("Location:{$self}/{$portal["item_id"]}/{$lang_code}");
+}
+
 $jquerySrc = ( htmlspecialchars($_SERVER['HTTP_HOST']) == 'localhost' ) ? "http://code.jquery.com/jquery-3.3.1.min.js" : "https://tools-static.wmflabs.org/cdnjs/ajax/libs/jquery/3.3.1/jquery.min.js";
 $scripts = "<script type='text/javascript' src='{$jquerySrc}' defer></script>
 	<script type='text/javascript' src='{$self}/js/loadmore.js' defer></script>";
