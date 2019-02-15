@@ -389,6 +389,9 @@ $getPortalInfo = function() use ($api, $item_id, $lang_code, $sites, $site_order
 	$i18n = $GLOBALS['i18n'];
 	
 	$item_data  = $api->lookupItemData($item_id, $lang_code, $sites);
+	if ( isset($item_data["redirects"]) ) {
+		$item_id = $item_data["redirects"]["to"];
+	}
 	$item_label = getDeepData($item_data, ["labels", $lang_code, "value"], "({$item_id}: {$i18n['nolabel']})");
 	$item_desc  = getDeepData($item_data, ["descriptions", $lang_code, "value"]);
 	$sitelinks  = sortByKey(
@@ -406,6 +409,7 @@ $getPortalInfo = function() use ($api, $item_id, $lang_code, $sites, $site_order
 	$image_credits = getRelevantImageCredits($sites_linked);
 	
 	return [
+		"item_id" => $item_id,
 		"item_label" => $item_label,
 		"item_desc" => $item_desc,
 		"sitelinks" => $sitelinks,
