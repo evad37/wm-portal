@@ -1,0 +1,51 @@
+{
+	"related": "Gerelateerde items",
+	"nearby": "Nabijgelegen items",
+	"identifiers": "Identificatiecodes",
+	"nolabel": "geen label",
+
+	"commons": {
+		"name": "Wikimedia Commons",
+		"type": "Mediabestanden"
+	},
+	"reasonator": {
+		"name": "Reasonator",
+		"type": "Gegevens"
+	},
+	"wikibooks": {
+		"name": "Wikibooks",
+		"type": "Tekstboek"
+	},
+	"wikinews": {
+		"name": "Wikinieuws",
+		"type": "Nieuws"
+	},
+	"wikipedia": {
+		"name": "Wikipedia",
+		"type": "Artikel"
+	},
+	"wikiquote": {
+		"name": "Wikiquote",
+		"type": "Citaten"
+	},
+	"wikisource": {
+		"name": "Wikisource",
+		"type": "Bronteksten"
+	},
+	"wikispecies": {
+		"name": "Wikispecies",
+		"type": "Taxonomische referentie"
+	},
+	"wikiversity": {
+		"name": "Wikiversity",
+		"type": "Leermiddelen"
+	},	
+	"wikivoyage": {
+		"name": "Wikivoyage",
+		"type": "Reisgids"
+	},
+	"wiktionary": {
+		"name": "Wiktionary",
+		"type": "Woordenboekinvoer"
+	}
+}

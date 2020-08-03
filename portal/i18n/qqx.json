@@ -1,0 +1,51 @@
+{
+	"related": "related",
+	"nearby": "nearby",
+	"identifiers": "identifiers",
+	"nolabel": "nolabel",
+
+	"commons": {
+		"name": "commons.name",
+		"type": "commons.type"
+	},
+	"reasonator": {
+		"name": "reasonator.name",
+		"type": "reasonator.type"
+	},
+	"wikibooks": {
+		"name": "wikibooks.name",
+		"type": "wikibooks.type"
+	},
+	"wikinews": {
+		"name": "wikinews.name",
+		"type": "wikinews.type"
+	},
+	"wikipedia": {
+		"name": "wikipedia.name",
+		"type": "wikipedia.type"
+	},
+	"wikiquote": {
+		"name": "wikiquote.name",
+		"type": "wikiquote.type"
+	},
+	"wikisource": {
+		"name": "wikisource.name",
+		"type": "wikisource.type"
+	},
+	"wikispecies": {
+		"name": "wikispecies.name",
+		"type": "wikispecies.type"
+	},
+	"wikiversity": {
+		"name": "wikiversity.name",
+		"type": "wikiversity.type"
+	},	
+	"wikivoyage": {
+		"name": "wikivoyage.name",
+		"type": "wikivoyage.type"
+	},
+	"wiktionary": {
+		"name": "wiktionary.name",
+		"type": "wiktionary.type"
+	}
+}

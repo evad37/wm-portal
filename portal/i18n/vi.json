@@ -1,0 +1,51 @@
+{
+	"related": "Các mục liên quan",
+	"nearby": "Các mục lân cận",
+	"identifiers": "Định danh",
+	"nolabel": "không có nhãn",
+
+	"commons": {
+		"name": "Wikimedia Commons",
+		"type": "các tập tin media"
+	},
+	"reasonator": {
+		"name": "Reasonator",
+		"type": "Dữ liệu"
+	},
+	"wikibooks": {
+		"name": "Wikibooks",
+		"type": "Sách giáo khoa"
+	},
+	"wikinews": {
+		"name": "Wikinews",
+		"type": "Tin tức"
+	},
+	"wikipedia": {
+		"name": "Wikipedia",
+		"type": "Điều"
+	},
+	"wikiquote": {
+		"name": "Wikiquote",
+		"type": "Báo giá"
+	},
+	"wikisource": {
+		"name": "Wikisource",
+		"type": "Văn bản nguồn"
+	},
+	"wikispecies": {
+		"name": "Wikispecies",
+		"type": "Tài liệu tham khảo"
+	},
+	"wikiversity": {
+		"name": "Wikiversity",
+		"type": "Tài nguyên học tập"
+	},	
+	"wikivoyage": {
+		"name": "Wikivoyage",
+		"type": "Hướng dẫn du lịch"
+	},
+	"wiktionary": {
+		"name": "Wiktionary",
+		"type": "Từ điển nhập"
+	}
+}

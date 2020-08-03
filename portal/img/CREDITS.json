@@ -1,0 +1,129 @@
+{
+	"licences": {
+		"CC BY-SA 3.0": {
+			"name": "Creative Commons Attribution-ShareAlike 3.0 Unported license",
+			"url": "https://creativecommons.org/licenses/by-sa/3.0/deed.en"
+		},
+		"CC0": {
+			"name": "CC0 1.0 Universal Public Domain Dedication",
+			"url": "https://creativecommons.org/licenses/by-sa/3.0/deed.en"
+		},
+		"PD": {
+			"name": "Public domain",
+			"url": "https://www.wikidata.org/wiki/Q19652"
+		}
+	},
+	
+	"notes": {
+		"trademarks": {
+			"note": "Wikimedia site icons ™ Wikimedia Foundation, Inc. These images are used in this project under the terms of the Trademark policy, section 3.6",
+			"url": "https://wikimediafoundation.org/wiki/Trademark_policy"
+		}
+	},
+
+	"images": {
+		"ajax-spinner": {
+			"title": "Ajax spinner",
+			"file": "Ajax-spinner.gif",
+			"source": "https://commons.wikimedia.org/wiki/File:Ajax-loader.gif",
+			"authors": "Ajaxload",
+			"license": "PD"
+		},
+	
+		"reasonator": {
+			"title": "Reasonator icon",
+			"file": "reasonator.png",
+			"source": "https://commons.wikimedia.org/wiki/File:Reasonator_logo_proposal.png",
+			"authors": "CristianCantoro",
+			"license": "CC BY-SA 3.0"
+		},
+		
+		"language_selection": {
+			"title": "Language selector icon",
+			"file": "language_selection.png",
+			"source": "https://commons.wikimedia.org/wiki/File:WMF-Agora-Language_selection-crop_3492D1.svg",
+			"authors": "Pau Giner",
+			"license": "CC0"
+		},
+		
+		"wikibooks": {
+			"title": "Wikibooks icon",
+			"file": "wikibooks.png",
+			"source": "https://commons.wikimedia.org/wiki/File:Notification-icon-Wikibooks-logo.svg",
+			"authors": "User:Jdforrester (WMF), User:Ramac, User:Bastique",
+			"license": "CC BY-SA 3.0"
+		},
+
+		"commons": {
+			"title": "Wikimedia Commons icon",
+			"file": "commons.png",
+			"source": "https://commons.wikimedia.org/wiki/File:Notification-icon-Commons-logo.svg",
+			"authors": "User:Jdforrester (WMF), User:3247, User:Reidab",
+			"license": "PD"
+		},
+
+		"wikinews": {
+			"title": "Wikinews icon",
+			"file": "wikinews.png",
+			"source": "https://commons.wikimedia.org/wiki/File:Notification-icon-Wikinews-logo.svg",
+			"authors": "User:Jdforrester (WMF), User:Time3000, User:Simon, User:NGerda, User:David Vasquez",
+			"license": "CC BY-SA 3.0"
+		},
+
+		"wikipedia": {
+			"title": "Wikipedia icon",
+			"file": "wikipedia.png",
+			"source": "https://commons.wikimedia.org/wiki/File:Notification-icon-Wikipedia-logo.svg",
+			"authors": "User:Jdforrester (WMF), Jonathan Hoefler",
+			"license": "PD"
+		},
+
+		"wikiquote": {
+			"title": "Wikiquote icon",
+			"file": "wikiquote.png",
+			"source": "https://commons.wikimedia.org/wiki/File:Notification-icon-Wikiquote.svg",
+			"authors": "User:Jdforrester (WMF), User:-xfi-, User:Rei-artur",
+			"license": "PD"
+		},
+
+		"wikisource": {
+			"title": "Wikisource icon",
+			"file": "wikisource.png",
+			"source": "https://commons.wikimedia.org/wiki/File:Notification-icon-Wikisource-logo.svg",
+			"authors": "User:Jdforrester (WMF), User:Rei-artur, Nicholas Moreau",
+			"license": "CC BY-SA 3.0"
+		},
+
+		"wikispecies": {
+			"title": "Wikispecies icon",
+			"file": "wikispecies.png",
+			"source": "https://commons.wikimedia.org/wiki/File:Notification-icon-Wikispecies-logo.svg",
+			"authors": "User:Jdforrester (WMF), User:Lycaon",
+			"license": "CC BY-SA 3.0"
+		},
+
+		"wikiversity": {
+			"title": "Wikiversity icon",
+			"file": "wikiversity.png",
+			"source": "https://commons.wikimedia.org/wiki/File:Notification-icon-Wikiversity-logo.svg",
+			"authors": "User:Jdforrester, User:verdy_p, User:Snorky",
+			"license": "CC BY-SA 3.0"
+		},
+
+		"wikivoyage": {
+			"title": "Wikivoyage icon",
+			"file": "wikivoyage.png",
+			"source": "https://commons.wikimedia.org/wiki/File:Notification-icon-Wikivoyage-logo.svg",
+			"authors": "User:Jdforrester (WMF), User:AleXXw, User:‎Danapit",
+			"license": "CC BY-SA 3.0"
+		},
+
+		"wiktionary": {
+			"title": "Wiktionary icon",
+			"file": "wiktionary.png",
+			"source": "https://commons.wikimedia.org/wiki/File:Notification-icon-Wiktionary-logo.svg",
+			"authors": "User:Jdforrester (WMF), User:Az1568",
+			"license": "CC BY-SA 3.0"
+		}
+	}
+}
