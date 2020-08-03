@@ -57,7 +57,7 @@ To update:
 <li>Become the tool account:<p><code>$</code> <code>become portal</code></li>
 <li>Pull from GitHub repo into the <code>public_html</code> folder:<p><code>$</code> <code>cd public_html<p>$</code> <code>git pull</code></li>
 <li>If the <code>.lighttpd.conf</code> file has changed, that file needs to be copied to the root directory:<p><code>$</code> <code>cp public_html/.lighttpd.conf .lighttpd.conf</code></li>
-<li>...then restart the webservice:<p><code>$</code> <code>webservice stop<p>$</code> <code>webservice start</code>
+<li>...then restart the webservice:<p><code>$</code> <code>webservice --backend=gridengine stop<p>$</code> <code>webservice --backend=gridengine start</code>
 </ol>
 
 ## Database
