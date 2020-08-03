@@ -2,7 +2,7 @@
 
 // --------- Configuration variables --------------------------------------------------------------
 $protocol = ( htmlspecialchars($_SERVER['HTTP_HOST']) == 'localhost' ) ? "http://" : "https://";
-$self = $protocol . htmlspecialchars($_SERVER["HTTP_HOST"]) . "/portal";
+$self = $protocol . htmlspecialchars($_SERVER["HTTP_HOST"]);
 // item id and lang code from url query params
 $item_id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_STRING);
 $lang_code = getBaseLanguage(filter_input(INPUT_GET, 'lang', FILTER_SANITIZE_STRING) ?: getDefaultLanguage());

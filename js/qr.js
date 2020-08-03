@@ -57,7 +57,7 @@ function redrawQrCode() {
 	
 	// Get form inputs and compute QR Code
 	var ecl = qrcodegen.QrCode.Ecc.LOW;
-	var text = window.location.protocol + '//' + window.location.hostname + '/portal/Q' + document.getElementById("codenumber-input").value;
+	var text = window.location.protocol + '//' + window.location.hostname + '/Q' + document.getElementById("codenumber-input").value;
 	var segs = qrcodegen.QrSegment.makeSegments(text);
 	var minVer = 1;
 	var maxVer = 40;

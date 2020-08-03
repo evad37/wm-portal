@@ -2,7 +2,7 @@ $( function($) {
 // Globals:
 var item_id     = $('input[name="id"]').val();
 var lang_code   = $('select[name="lang"]').val();
-var portal_url  = window.location.protocol + '//' +  window.location.hostname + '/portal/';
+var portal_url  = window.location.protocol + '//' +  window.location.hostname + '/';
 	
 // Get data from deeply nested arrays, or a fallback value if any of the nested keys aren't set;
 // i.e. `getNestedData(obj, [key1, key2, key3])` is equivalent to `obj[key1][key2[key3]`
